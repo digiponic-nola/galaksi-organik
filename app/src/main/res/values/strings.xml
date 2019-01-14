@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Galaxy Organic</string>
+    <string name="myorder">My Order</string>
+    <string name="notifikasi">Notifikasi</string>
+    <string name="login">Login</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="shop">Shop</string>
+    <string name="header_login">Login untuk memudahkan anda melacak order</string>
+    <string name="descr_login">Anda dapat dengan mudah melakukan login dengan social media</string>
+    <string name="facebook">Facebook</string>
+    <string name="google">Google</string>
+</resources>
