@@ -10,7 +10,7 @@ import org.json.JSONObject
 import java.net.MalformedURLException
 import java.net.URL
 
-class LoginPresenter : LoginView.LoginFacebookView{
+class LoginFacebookPresenter : LoginView.LoginFacebookView{
     private lateinit var mCallbackManager : CallbackManager
 
     override fun initFB() {

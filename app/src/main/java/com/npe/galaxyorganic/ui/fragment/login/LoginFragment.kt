@@ -14,21 +14,17 @@ import com.facebook.login.widget.LoginButton
 
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.activity.MainActivity
-import com.npe.galaxyorganic.ui.presenter.LoginPresenter
+import com.npe.galaxyorganic.ui.presenter.LoginFacebookPresenter
 import com.npe.galaxyorganic.ui.view.LoginView
 import kotlinx.android.synthetic.main.fragment_login.view.*
-import org.json.JSONException
 import java.util.*
-import org.json.JSONObject
-import java.net.MalformedURLException
-import java.net.URL
 
 
 class LoginFragment : Fragment() , LoginView.LoginUserView {
 
     private lateinit var btnFacebook : LoginButton
     private lateinit var btnGoogle : Button
-    private lateinit var presenterFacebook : LoginPresenter
+    private lateinit var facebookPresenterFacebook : LoginFacebookPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,14 +36,14 @@ class LoginFragment : Fragment() , LoginView.LoginUserView {
         btnFacebook = v.btn_login_facebook
         btnGoogle = v.btn_login_google
 
-        presenterFacebook = LoginPresenter()
+        facebookPresenterFacebook = LoginFacebookPresenter()
 
-        presenterFacebook.initFB()
+        facebookPresenterFacebook.initFB()
 
         btnFacebook.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday"))
         btnFacebook.setFragment(this)
         btnFacebook.setOnClickListener {
-            presenterFacebook.logIn(btnFacebook)
+            facebookPresenterFacebook.logIn(btnFacebook)
         }
 
         btnGoogle.setOnClickListener {
@@ -67,7 +63,7 @@ class LoginFragment : Fragment() , LoginView.LoginUserView {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (data != null) {
-            presenterFacebook.onActivityResult(requestCode, resultCode, data)
+            facebookPresenterFacebook.onActivityResult(requestCode, resultCode, data)
         }
     }
 
