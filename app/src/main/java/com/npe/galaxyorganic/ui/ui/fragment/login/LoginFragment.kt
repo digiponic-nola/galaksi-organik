@@ -1,4 +1,4 @@
-package com.npe.galaxyorganic.ui.fragment.login
+package com.npe.galaxyorganic.ui.ui.fragment.login
 
 
 import android.content.Intent
@@ -21,7 +21,9 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.npe.galaxyorganic.R
-import com.npe.galaxyorganic.ui.activity.MainActivity
+import com.npe.galaxyorganic.ui.presenter.LoginFacebookPresenter
+import com.npe.galaxyorganic.ui.ui.activity.MainActivity
+import com.npe.galaxyorganic.ui.view.LoginUserView
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -30,7 +32,14 @@ import java.net.URL
 import java.util.*
 
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(), LoginUserView.LoginView {
+    override fun showLoading() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hideLoading() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     private lateinit var callbackManager: CallbackManager
     private lateinit var btnFacebook: LoginButton
@@ -39,6 +48,7 @@ class LoginFragment : Fragment() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mGoogleSignInClient: GoogleSignInClient
 
+    private lateinit var presenterLoginFacebook : LoginFacebookPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +60,6 @@ class LoginFragment : Fragment() {
         btnFacebook = v.btn_login_facebook
         btnGoogle = v.btn_login_google
         mAuth = FirebaseAuth.getInstance()
-
         callbackManager = CallbackManager.Factory.create()
 
         btnFacebook.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday"))

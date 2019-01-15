@@ -1,4 +1,4 @@
-package com.npe.galaxyorganic.ui.fragment.shop
+package com.npe.galaxyorganic.ui.ui.fragment.order
 
 
 import android.os.Bundle
@@ -9,14 +9,14 @@ import android.view.ViewGroup
 
 import com.npe.galaxyorganic.R
 
-class ShopFragment : Fragment() {
+class OrderFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val v = inflater.inflate(R.layout.fragment_shop, container, false)
+        val v = inflater.inflate(R.layout.fragment_order, container, false)
 
         return v
     }

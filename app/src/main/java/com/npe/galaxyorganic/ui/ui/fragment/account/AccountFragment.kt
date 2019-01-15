@@ -1,4 +1,4 @@
-package com.npe.galaxyorganic.ui.fragment.account
+package com.npe.galaxyorganic.ui.ui.fragment.account
 
 
 import android.os.Bundle

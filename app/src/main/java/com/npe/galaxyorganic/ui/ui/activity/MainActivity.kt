@@ -1,14 +1,14 @@
-package com.npe.galaxyorganic.ui.activity
+package com.npe.galaxyorganic.ui.ui.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.facebook.AccessToken
 import com.npe.galaxyorganic.R
-import com.npe.galaxyorganic.ui.fragment.account.AccountFragment
-import com.npe.galaxyorganic.ui.fragment.login.LoginFragment
-import com.npe.galaxyorganic.ui.fragment.order.OrderFragment
-import com.npe.galaxyorganic.ui.fragment.shop.ShopFragment
+import com.npe.galaxyorganic.ui.ui.fragment.account.AccountFragment
+import com.npe.galaxyorganic.ui.ui.fragment.login.LoginFragment
+import com.npe.galaxyorganic.ui.ui.fragment.order.OrderFragment
+import com.npe.galaxyorganic.ui.ui.fragment.shop.ShopFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
