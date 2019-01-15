@@ -33,12 +33,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-        <Button
+        <com.facebook.login.widget.LoginButton
                 android:id="@+id/btn_login_facebook"
-                android:text="@string/facebook"
-                android:layout_marginTop="@dimen/length20dp"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/length50dp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp" />
 
         <Button
                 android:text="@string/google"
