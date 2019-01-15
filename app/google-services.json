@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "76604994557",
+    "firebase_url": "https://galaxyorganic-445d8.firebaseio.com",
+    "project_id": "galaxyorganic-445d8",
+    "storage_bucket": "galaxyorganic-445d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76604994557:android:7b2c8afef2573490",
+        "android_client_info": {
+          "package_name": "com.npe.galaxyorganic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76604994557-al488qihn6dva94iv0r824ecblusfl9i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.npe.galaxyorganic",
+            "certificate_hash": "fb245e91f3d0d835706b7f668a0e36e5a6a4a8e2"
+          }
+        },
+        {
+          "client_id": "76604994557-0sc53s193h1dma14npbh9va1andfrbih.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDP5i4DUqkwtzHna1hIyU21iGj9c0cNYdE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76604994557-ltkakkjc97q4lq5natrhich4s1v6ruul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
