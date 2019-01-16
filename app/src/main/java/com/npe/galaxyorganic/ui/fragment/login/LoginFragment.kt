@@ -20,8 +20,8 @@ import com.google.firebase.auth.FirebaseUser
 
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.activity.MainActivity
-import com.npe.galaxyorganic.ui.presenter.LoginFacebookPresenter
-import com.npe.galaxyorganic.ui.presenter.LoginGooglePresenter
+import com.npe.galaxyorganic.ui.presenter.login.LoginFacebookPresenter
+import com.npe.galaxyorganic.ui.presenter.login.LoginGooglePresenter
 import com.npe.galaxyorganic.ui.view.LoginView
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import java.util.*

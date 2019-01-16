@@ -10,37 +10,47 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.npe.galaxyorganic.R
+import com.npe.galaxyorganic.ui.model.ShopItemModel
 import com.npe.galaxyorganic.ui.model.ShopMenuModel
-import com.npe.galaxyorganic.ui.presenter.ShopMenuPresenter
+import com.npe.galaxyorganic.ui.presenter.shop.ShopItemPresenter
+import com.npe.galaxyorganic.ui.presenter.shop.ShopMenuPresenter
 import com.npe.galaxyorganic.ui.view.ShopView
 import kotlinx.android.synthetic.main.fragment_shop.view.*
 
-class ShopFragment : Fragment(), ShopView.ShopMenuView {
+class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
 
-    private lateinit var recycler : RecyclerView
-    private lateinit var mAdapter : AdapterShopFragment
+    private lateinit var recyclerMenu : RecyclerView
+    private lateinit var recyclerItem : RecyclerView
+    private lateinit var mAdapterMenu : AdapterShopFragment
+    private lateinit var mAdapterItem : AdapterShopItemFragment
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_shop, container, false)
 
-        recycler = v.recycler_menu_shop
+        recyclerMenu = v.recycler_menu_shop
+        recyclerItem = v.recycler_all_list_shop
+        val presenterItem = ShopItemPresenter(this, requireContext())
         val presenterMenu = ShopMenuPresenter(this, requireContext())
         presenterMenu.getDataMenu()
+
+        presenterItem.getAllItem()
 
         return v
     }
 
     override fun dataMenu(data: List<ShopMenuModel>) {
-        recycler.layoutManager = GridLayoutManager(activity, 4)
-        mAdapter = AdapterShopFragment(requireContext(), data)
-        recycler.adapter = mAdapter
+        recyclerMenu.layoutManager = GridLayoutManager(activity, 4)
+        mAdapterMenu = AdapterShopFragment(requireContext(), data)
+        recyclerMenu.adapter = mAdapterMenu
     }
 
-
-
+    override fun dataItem(data: List<ShopItemModel>) {
+        recyclerItem.layoutManager = GridLayoutManager(activity,2)
+        mAdapterItem = AdapterShopItemFragment(requireContext(), data)
+        recyclerItem.adapter = mAdapterItem
+    }
 
 }

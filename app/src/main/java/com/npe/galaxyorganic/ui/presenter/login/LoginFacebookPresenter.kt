@@ -1,4 +1,4 @@
-package com.npe.galaxyorganic.ui.presenter
+package com.npe.galaxyorganic.ui.presenter.login
 
 import android.content.Intent
 import com.facebook.*

@@ -1,4 +1,4 @@
-package com.npe.galaxyorganic.ui.presenter
+package com.npe.galaxyorganic.ui.presenter.login
 
 import android.support.v4.app.FragmentActivity
 import android.util.Log

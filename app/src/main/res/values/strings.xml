@@ -15,6 +15,8 @@
 
     <string name="facebook_id">2757097657847712</string>
     <string name="facebook_login_protocol">fb2757097657847712</string>
+    <string name="nama_barang">Nama Barang</string>
+    <string name="harga_barang">Harga Barang</string>
 
     <!-- array menu shop -->
     <string-array name="menu_shop">

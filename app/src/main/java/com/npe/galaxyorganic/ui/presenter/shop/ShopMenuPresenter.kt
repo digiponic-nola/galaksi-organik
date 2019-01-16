@@ -1,4 +1,4 @@
-package com.npe.galaxyorganic.ui.presenter
+package com.npe.galaxyorganic.ui.presenter.shop
 
 import android.content.Context
 import com.npe.galaxyorganic.R
