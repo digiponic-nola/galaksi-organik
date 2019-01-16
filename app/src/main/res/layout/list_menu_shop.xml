@@ -1,30 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:cardUseCompatPadding="true"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="4dp"
-        android:layout_width="wrap_content"
+        android:layout_margin="@dimen/length5dp"
+        android:orientation="vertical"
+        android:layout_width="@dimen/length100dp"
         android:layout_height="wrap_content">
-
-    <LinearLayout
-            android:layout_margin="@dimen/length5dp"
-            android:orientation="vertical"
-            android:layout_width="@dimen/length100dp"
-            android:layout_height="wrap_content">
-        <ImageView
-                android:id="@+id/imgv_listMenu_shop"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/length50dp" />
-        <TextView
-                android:textColor="@color/colorBlack"
-                android:id="@+id/tv_listMenu_shop"
-                android:text="TEXT"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-    </LinearLayout>
-
-</android.support.v7.widget.CardView>
+    <ImageView
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/imgv_listMenu_shop"
+            android:layout_width="@dimen/length30dp"
+            android:layout_height="@dimen/length30dp"/>
+    <TextView
+            android:textColor="@color/colorBlack"
+            android:id="@+id/tv_listMenu_shop"
+            android:text="TEXT"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+</LinearLayout>

@@ -12,13 +12,17 @@ class ShopMenuPresenter(private val view: ShopView.ShopMenuView, private val con
 
     override fun getDataMenu() {
         val listData = context.resources.getStringArray(R.array.menu_shop)
-
+        val iconMenu = arrayListOf(
+            R.drawable.icon_makanan,
+            R.drawable.icon_sayur,
+            R.drawable.icon_beras,
+            R.drawable.icon_jus,
+            R.drawable.icon_fish)
         listMenu.clear()
 
         for (i in listData.indices) {
-            listMenu.add(ShopMenuModel(R.drawable.ic_shopping_cart, listData[i]))
+            listMenu.add(ShopMenuModel(iconMenu[i], listData[i]))
         }
-
         view.dataMenu(listMenu)
     }
 
