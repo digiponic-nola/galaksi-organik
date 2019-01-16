@@ -16,4 +16,13 @@
     <string name="facebook_id">2757097657847712</string>
     <string name="facebook_login_protocol">fb2757097657847712</string>
 
+    <!-- array menu shop -->
+    <string-array name="menu_shop">
+        <item>Makanan</item>
+        <item>Sayur</item>
+        <item>Beras</item>
+        <item>Jus</item>
+        <item>Ikan</item>
+    </string-array>
+
 </resources>
