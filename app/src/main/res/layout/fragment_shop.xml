@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".ui.fragment.shop.ShopFragment">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ui.fragment.shop.ShopFragment">
+
+    <LinearLayout
+            android:layout_marginTop="@dimen/length5dp"
+            android:id="@+id/layout_shippingArea_shop"
+            android:background="@drawable/customborder"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/length50dp">
+        <Spinner
+                android:textAlignment="center"
+                android:id="@+id/drop_shippingArea_shop"
+                android:spinnerMode="dropdown"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+        </Spinner>
+
+        <Button
+                android:background="@android:color/transparent"
+                android:id="@+id/btn_dateShipping_shop"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:text="16/Jan/2019"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="@dimen/length10dp"
+            android:layout_below="@id/layout_shippingArea_shop"
             android:id="@+id/recycler_menu_shop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

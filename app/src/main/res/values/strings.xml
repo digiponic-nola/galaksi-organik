@@ -27,4 +27,12 @@
         <item>Ikan</item>
     </string-array>
 
+    <!-- array area shipping-->
+    <string-array name="area_shipping">
+        <item>Malang</item>
+        <item>Batu</item>
+    </string-array>
+
+
+
 </resources>
