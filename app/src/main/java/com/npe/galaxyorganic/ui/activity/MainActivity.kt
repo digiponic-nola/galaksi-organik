@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.facebook.AccessToken
+import com.google.firebase.auth.FirebaseAuth
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.fragment.account.AccountFragment
 import com.npe.galaxyorganic.ui.fragment.login.LoginFragment
@@ -13,9 +14,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var auth : FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        auth = FirebaseAuth.getInstance()
 
         loadShopFragment(savedInstanceState)
 
@@ -32,10 +37,14 @@ class MainActivity : AppCompatActivity() {
                     loadOrderFragment(savedInstanceState)
                 }
                 R.id.menu_login -> {
+                    val user = auth.currentUser
                     item.setCheckable(true)
                     if (AccessToken.getCurrentAccessToken() != null && !AccessToken.getCurrentAccessToken().isExpired) {
                         loadAccountFragment(savedInstanceState)
-                    } else {
+                    } else if(user != null){
+                        loadAccountFragment(savedInstanceState)
+                    }
+                    else {
                         loadLoginFragment(savedInstanceState)
                     }
                 }

@@ -27,7 +27,6 @@
                     android:layout_height="wrap_content">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                        android:background="@color/colorAccent"
                         android:id="@+id/imgv_profile_account"
                         android:layout_width="@dimen/length100dp"
                         android:layout_height="@dimen/length100dp"/>

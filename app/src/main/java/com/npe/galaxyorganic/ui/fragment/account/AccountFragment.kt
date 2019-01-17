@@ -1,6 +1,7 @@
 package com.npe.galaxyorganic.ui.fragment.account
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -8,7 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.npe.galaxyorganic.R
+import com.npe.galaxyorganic.ui.activity.MainActivity
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_account.view.*
 
@@ -20,6 +25,8 @@ class AccountFragment : Fragment() {
     private lateinit var btnHelp : Button
     private lateinit var btnlogout : Button
     private lateinit var imgProfile : CircleImageView
+    private lateinit var auth : FirebaseAuth
+    private lateinit var user : FirebaseUser
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +42,26 @@ class AccountFragment : Fragment() {
         btnlogout = v.btn_logout_account
         imgProfile = v.imgv_profile_account
 
+        auth = FirebaseAuth.getInstance()
+        user = auth.currentUser!!
+
+        tvEmail.text = user?.email
+        tvNama.text = user?.displayName
+        Glide.with(this!!.context!!)
+            .load(user?.photoUrl)
+            .into(imgProfile)
+
+        btnlogout.setOnClickListener {
+            logOut()
+        }
+
         return v
+    }
+
+    private fun logOut() {
+        auth.signOut()
+        val intent = Intent(activity, MainActivity::class.java)
+        startActivity(intent)
     }
 
 
