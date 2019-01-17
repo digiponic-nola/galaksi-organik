@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
-import com.facebook.*
+import com.facebook.AccessToken
 import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -17,7 +17,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.activity.MainActivity
 import com.npe.galaxyorganic.ui.presenter.login.LoginFacebookPresenter
@@ -27,18 +26,18 @@ import kotlinx.android.synthetic.main.fragment_login.view.*
 import java.util.*
 
 
-class LoginFragment : Fragment() , LoginView.LoginUserView {
+class LoginFragment : Fragment(), LoginView.LoginUserView {
 
 
-    private lateinit var btnFacebook : LoginButton
-    private lateinit var btnGoogle : Button
-    private lateinit var facebookPresenterFacebook : LoginFacebookPresenter
+    private lateinit var btnFacebook: LoginButton
+    private lateinit var btnGoogle: Button
+    private lateinit var facebookPresenterFacebook: LoginFacebookPresenter
 
     private lateinit var googleSignInClient: GoogleSignInClient
-    private lateinit var googlePresenter : LoginGooglePresenter
+    private lateinit var googlePresenter: LoginGooglePresenter
 
     companion object {
-        lateinit var gso : GoogleSignInOptions
+        lateinit var gso: GoogleSignInOptions
         private const val TAG = "GoogleActivity"
         private const val RC_SIGN_IN = 9001
     }
@@ -87,20 +86,22 @@ class LoginFragment : Fragment() , LoginView.LoginUserView {
         if (data != null) {
             facebookPresenterFacebook.onActivityResult(requestCode, resultCode, data)
         }
-        if(requestCode == RC_SIGN_IN){
+        if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)
                 googlePresenter.firebaseAuthWithGoogle(account, requireActivity())
-            } catch (e : ApiException){
+            } catch (e: ApiException) {
                 e.printStackTrace()
             }
         }
     }
 
     override fun dataFromGoogle(user: FirebaseUser?) {
-        if(user != null){
-          Toast.makeText(context, "Email:"+user.email, Toast.LENGTH_SHORT).show()
+        if (user != null) {
+            val intent = Intent(activity, MainActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(context, "Email:" + user.email, Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(context, "user:null", Toast.LENGTH_SHORT).show()
         }
@@ -117,7 +118,7 @@ class LoginFragment : Fragment() , LoginView.LoginUserView {
     override fun onStart() {
         super.onStart()
         //facebook
-        if(AccessToken.getCurrentAccessToken() != null && !AccessToken.getCurrentAccessToken().isExpired){
+        if (AccessToken.getCurrentAccessToken() != null && !AccessToken.getCurrentAccessToken().isExpired) {
             Toast.makeText(context, "Login berhasil", Toast.LENGTH_SHORT).show()
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
@@ -125,16 +126,22 @@ class LoginFragment : Fragment() , LoginView.LoginUserView {
         //google
         var auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
-        dataFromGoogle(currentUser)
+        if (currentUser != null) {
+            dataFromGoogle(currentUser)
+            val intent = Intent(activity, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        if(AccessToken.getCurrentAccessToken() != null && !AccessToken.getCurrentAccessToken().isExpired){
+        //facebook
+        if (AccessToken.getCurrentAccessToken() != null && !AccessToken.getCurrentAccessToken().isExpired) {
             Toast.makeText(context, "Login berhasil", Toast.LENGTH_SHORT).show()
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
         }
+
     }
 
 
