@@ -4,22 +4,25 @@ package com.npe.galaxyorganic.ui.fragment.login
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
-import com.facebook.AccessToken
+import com.facebook.*
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.*
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.activity.MainActivity
-import com.npe.galaxyorganic.ui.presenter.login.LoginFacebookPresenter
 import com.npe.galaxyorganic.ui.presenter.login.LoginGooglePresenter
 import com.npe.galaxyorganic.ui.view.LoginView
 import kotlinx.android.synthetic.main.fragment_login.view.*
@@ -31,10 +34,13 @@ class LoginFragment : Fragment(), LoginView.LoginUserView {
 
     private lateinit var btnFacebook: LoginButton
     private lateinit var btnGoogle: Button
-    private lateinit var facebookPresenterFacebook: LoginFacebookPresenter
 
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var googlePresenter: LoginGooglePresenter
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var user: FirebaseUser
+    private lateinit var mCallbackManager: CallbackManager
 
     companion object {
         lateinit var gso: GoogleSignInOptions
@@ -49,17 +55,25 @@ class LoginFragment : Fragment(), LoginView.LoginUserView {
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_login, container, false)
 
-        btnFacebook = v.btn_login_facebook
+        auth = FirebaseAuth.getInstance()
+
+        if (auth.currentUser == null) {
+            FacebookSdk.sdkInitialize(context)
+            btnFacebook = v.btn_login_facebook
+        }
+
         btnGoogle = v.btn_login_google
 
-        //facebook setting
-        facebookPresenterFacebook = LoginFacebookPresenter()
-        facebookPresenterFacebook.initFB()
-        btnFacebook.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday"))
+        mCallbackManager = CallbackManager.Factory.create()
+        btnFacebook.setReadPermissions(Arrays.asList("email"))
         btnFacebook.setFragment(this)
-        btnFacebook.setOnClickListener {
-            facebookPresenterFacebook.logIn(btnFacebook)
+        //facebook
+
+
+        btnFacebook.setOnClickListener { v ->
+            buttonClickLoginFB(v)
         }
+
 
         //google setting
         googlePresenter = LoginGooglePresenter(this)
@@ -75,6 +89,41 @@ class LoginFragment : Fragment(), LoginView.LoginUserView {
         return v
     }
 
+    fun buttonClickLoginFB(view: View) {
+        LoginManager.getInstance().registerCallback(mCallbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult?) {
+                handleFacebookToken(result?.accessToken)
+            }
+
+            override fun onCancel() {
+                Toast.makeText(context, "User Canceled", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onError(error: FacebookException?) {
+                Toast.makeText(context, error?.message, Toast.LENGTH_SHORT).show()
+            }
+
+        })
+    }
+
+    private fun handleFacebookToken(accessToken: AccessToken?) {
+        val credentialFacebook: AuthCredential = FacebookAuthProvider.getCredential(accessToken!!.token)
+        auth.signInWithCredential(credentialFacebook).addOnCompleteListener(object : OnCompleteListener<AuthResult> {
+            override fun onComplete(p0: Task<AuthResult>) {
+                if (p0.isSuccessful) {
+                    val currentUser = auth.currentUser
+                    dataUser(currentUser)
+                } else {
+                    Toast.makeText(context, "error login", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
+
+    private fun dataUser(currentUser: FirebaseUser?) {
+        Log.d("EmailFacebook", currentUser?.email)
+    }
+
     override fun loginGoogle() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
@@ -84,7 +133,7 @@ class LoginFragment : Fragment(), LoginView.LoginUserView {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (data != null) {
-            facebookPresenterFacebook.onActivityResult(requestCode, resultCode, data)
+            mCallbackManager.onActivityResult(requestCode, resultCode, data)
         }
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
@@ -118,11 +167,7 @@ class LoginFragment : Fragment(), LoginView.LoginUserView {
     override fun onStart() {
         super.onStart()
         //facebook
-        if (AccessToken.getCurrentAccessToken() != null && !AccessToken.getCurrentAccessToken().isExpired) {
-            Toast.makeText(context, "Login berhasil", Toast.LENGTH_SHORT).show()
-            val intent = Intent(activity, MainActivity::class.java)
-            startActivity(intent)
-        }
+
         //google
         var auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
@@ -135,13 +180,6 @@ class LoginFragment : Fragment(), LoginView.LoginUserView {
 
     override fun onResume() {
         super.onResume()
-        //facebook
-        if (AccessToken.getCurrentAccessToken() != null && !AccessToken.getCurrentAccessToken().isExpired) {
-            Toast.makeText(context, "Login berhasil", Toast.LENGTH_SHORT).show()
-            val intent = Intent(activity, MainActivity::class.java)
-            startActivity(intent)
-        }
-
     }
 
 
