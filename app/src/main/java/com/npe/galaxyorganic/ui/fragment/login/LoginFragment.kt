@@ -39,7 +39,6 @@ class LoginFragment : Fragment(), LoginView.LoginUserView {
     private lateinit var googlePresenter: LoginGooglePresenter
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var user: FirebaseUser
     private lateinit var mCallbackManager: CallbackManager
 
     companion object {
@@ -169,10 +168,8 @@ class LoginFragment : Fragment(), LoginView.LoginUserView {
         //facebook
 
         //google
-        var auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            dataFromGoogle(currentUser)
+        if (auth.currentUser != null) {
+            dataFromGoogle(auth.currentUser)
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
         }
@@ -180,6 +177,10 @@ class LoginFragment : Fragment(), LoginView.LoginUserView {
 
     override fun onResume() {
         super.onResume()
+        if(auth.currentUser != null){
+            val intent = Intent(activity, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 
