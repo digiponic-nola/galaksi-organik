@@ -2,6 +2,7 @@ package com.npe.galaxyorganic.ui.view
 
 import android.content.Intent
 import android.support.v4.app.FragmentActivity
+import android.view.View
 import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseUser
@@ -12,12 +13,14 @@ interface LoginView{
         fun hideLoaidng()
         fun dataFromGoogle(user: FirebaseUser?)
         fun loginGoogle()
+        fun successLogin()
+        fun failedLogin(message: String?)
     }
 
     interface LoginFacebookView{
         fun initFB()
+        fun onButtonClicked(view : View)
         fun onActivityResult(requestCode : Int, resultCode : Int, data : Intent)
-        fun logIn(btnFacebook: LoginButton)
     }
 
     interface LoginGoogleView{
