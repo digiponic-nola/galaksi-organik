@@ -100,8 +100,8 @@ class LoginFragment : Fragment(), LoginView.LoginUserView {
     override fun dataFromGoogle(user: FirebaseUser?) {
         if (user != null) {
             val intent = Intent(activity, MainActivity::class.java)
+            intent.putExtra("Nama", user.displayName)
             startActivity(intent)
-            Toast.makeText(context, "Email:" + user.email, Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(context, "user:null", Toast.LENGTH_SHORT).show()
         }
