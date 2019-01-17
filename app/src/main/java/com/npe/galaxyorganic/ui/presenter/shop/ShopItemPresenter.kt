@@ -1,6 +1,10 @@
 package com.npe.galaxyorganic.ui.presenter.shop
 
 import android.content.Context
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.model.ShopItemModel
 import com.npe.galaxyorganic.ui.view.ShopView
 import java.text.SimpleDateFormat
@@ -60,5 +64,14 @@ class ShopItemPresenter(val view: ShopView.ShopItemView, val context: Context) :
         view.setDateText(dateString)
     }
 
+    override fun onAreaPickerClicked() {
+        var dataArea = ArrayAdapter.createFromResource(context, R.array.area_shipping, android.R.layout.simple_spinner_dropdown_item)
+        dataArea.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        view.displayAreaDialog(dataArea)
+    }
 
+    override fun setArea(parent: AdapterView<*>?, viewShop: View?, position: Int, id: Long) {
+        var item : String = parent?.getItemAtPosition(position).toString()
+        view.setAreaText(item)
+    }
 }

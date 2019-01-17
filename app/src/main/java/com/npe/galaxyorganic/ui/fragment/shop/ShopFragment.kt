@@ -19,13 +19,10 @@ import com.npe.galaxyorganic.ui.presenter.shop.ShopItemPresenter
 import com.npe.galaxyorganic.ui.presenter.shop.ShopMenuPresenter
 import com.npe.galaxyorganic.ui.view.ShopView
 import kotlinx.android.synthetic.main.fragment_shop.view.*
-import java.text.SimpleDateFormat
-import java.util.*
-import android.widget.DatePicker
-
 
 
 class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
+
 
 
     private lateinit var recyclerMenu: RecyclerView
@@ -58,22 +55,9 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
         }
 
         //area shipping
-        var dataArea = ArrayAdapter.createFromResource(context, R.array.area_shipping, android.R.layout.simple_spinner_dropdown_item)
-        dataArea.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerArea.adapter = dataArea
-        spinnerArea.getBackground().setColorFilter(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
+        presenterItem.onAreaPickerClicked()
 
 
-        spinnerArea.onItemSelectedListener = object  : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Toast.makeText(context, spinnerArea.selectedItem.toString(), Toast.LENGTH_SHORT).show()
-            }
-
-        }
 
         presenterMenu.getDataMenu()
 
@@ -84,7 +68,7 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
 
 
     override fun dataMenu(data: List<ShopMenuModel>) {
-        recyclerMenu.layoutManager = GridLayoutManager(activity, 4)
+        recyclerMenu.layoutManager = GridLayoutManager(this!!.activity, 4)
         mAdapterMenu = AdapterShopFragment(requireContext(), data)
         recyclerMenu.adapter = mAdapterMenu
     }
@@ -108,4 +92,23 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
         datePicker.show()
     }
 
+    override fun displayAreaDialog(dataArea: ArrayAdapter<CharSequence>) {
+        spinnerArea.adapter = dataArea
+        spinnerArea.getBackground().setColorFilter(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
+        spinnerArea.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                presenterItem.setArea(parent, view,position, id)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+        }
+
+    }
+
+    override fun setAreaText(area: String) {
+        Toast.makeText(context, area, Toast.LENGTH_SHORT).show()
+    }
 }
