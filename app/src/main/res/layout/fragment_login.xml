@@ -33,19 +33,45 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-        <com.facebook.login.widget.LoginButton
-                android:id="@+id/btn_login_facebook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+        <FrameLayout
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <com.facebook.login.widget.LoginButton
+                    android:visibility="invisible"
+                    android:id="@+id/login_button_facebook"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            <Button
+                    android:id="@+id/btn_login_facebook"
+                    android:paddingLeft="@dimen/length5dp"
+                    android:drawableLeft="@drawable/icon_facebook"
+                    android:background="@color/colorBlue"
+                    android:layout_width="match_parent"
+                    android:text="@string/facebook"
+                    android:textStyle="bold"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="@color/colorWhite"
+                    android:paddingRight="@dimen/length5dp"
+                    android:layout_height="@dimen/length40dp"/>
+
+        </FrameLayout>
+
 
         <Button
+                android:paddingRight="@dimen/length5dp"
+                android:paddingLeft="@dimen/length5dp"
+                android:drawableLeft="@drawable/icon_google"
+                android:textStyle="bold"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:background="@color/colorRed"
+                android:textColor="@color/colorWhite"
                 android:text="@string/google"
                 android:id="@+id/btn_login_google"
                 android:layout_marginTop="@dimen/length5dp"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/length50dp"/>
+                android:layout_height="@dimen/length40dp"/>
     </LinearLayout>
 </LinearLayout>

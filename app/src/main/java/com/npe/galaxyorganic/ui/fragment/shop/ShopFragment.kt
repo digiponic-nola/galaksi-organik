@@ -109,6 +109,6 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
     }
 
     override fun setAreaText(area: String) {
-        Toast.makeText(context, area, Toast.LENGTH_SHORT).show()
+        //set area shipping
     }
 }

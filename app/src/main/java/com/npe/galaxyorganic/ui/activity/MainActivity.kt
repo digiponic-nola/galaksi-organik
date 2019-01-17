@@ -2,6 +2,8 @@ package com.npe.galaxyorganic.ui.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.facebook.AccessToken
 import com.google.firebase.auth.FirebaseAuth
@@ -20,8 +22,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        auth = FirebaseAuth.getInstance()
-
         loadShopFragment(savedInstanceState)
 
         bottom_navigation.menu.getItem(0).isCheckable = false
@@ -39,9 +39,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.menu_login -> {
                     val user = auth.currentUser
                     item.setCheckable(true)
-                    if (AccessToken.getCurrentAccessToken() != null && !AccessToken.getCurrentAccessToken().isExpired) {
-                        loadAccountFragment(savedInstanceState)
-                    } else if(user != null){
+                    if(user != null){
                         loadAccountFragment(savedInstanceState)
                     }
                     else {
@@ -95,6 +93,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
+        if(user != null){
+            val menu : Menu = bottom_navigation.menu
+            val menuAccount : MenuItem = menu.findItem(R.id.menu_login)
+            menuAccount.title = "Profile"
+        }
+    }
 
-
+    override fun onResume() {
+        super.onResume()
+        auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
+        if(user != null){
+            val menu : Menu = bottom_navigation.menu
+            val menuAccount : MenuItem = menu.findItem(R.id.menu_login)
+            menuAccount.title = "Profile"
+        }
+    }
 }

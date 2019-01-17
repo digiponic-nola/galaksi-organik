@@ -1,11 +1,13 @@
 package com.npe.galaxyorganic.ui.presenter.login
 
+import android.content.Intent
 import android.support.v4.app.FragmentActivity
 import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.npe.galaxyorganic.ui.activity.MainActivity
 import com.npe.galaxyorganic.ui.fragment.login.LoginFragment
 import com.npe.galaxyorganic.ui.view.LoginView
 
@@ -42,16 +44,15 @@ class LoginGooglePresenter : LoginView.LoginGoogleView {
         auth.signInWithCredential(credetial)
             .addOnCompleteListener(requireActivity) { task ->
                 if (task.isSuccessful) {
-                    Log.d("LoginGoogle", "singInCredetial:success")
                     val user = auth.currentUser
                     loginUserView.dataFromGoogle(user)
+                    val intent = Intent(requireActivity, MainActivity::class.java)
+                    requireActivity.startActivity(intent)
                 } else {
-                    Log.d("LoginGoogle", "singInCredetial:success")
+                    loginUserView.failedLogin("Gagal Login")
                 }
-
             }
     }
-
     override fun logOutGoogle() {
         var auth = FirebaseAuth.getInstance()
         auth.signOut()
@@ -62,7 +63,6 @@ class LoginGooglePresenter : LoginView.LoginGoogleView {
         auth.signOut()
 
     }
-
 
 
 }

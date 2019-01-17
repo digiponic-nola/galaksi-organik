@@ -4,7 +4,6 @@ package com.npe.galaxyorganic.ui.fragment.login
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +15,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.activity.MainActivity
@@ -31,8 +28,9 @@ import java.util.*
 class LoginFragment : Fragment(), LoginView.LoginUserView {
 
 
-    private lateinit var btnFacebook: LoginButton
+    private lateinit var btnFacebook: Button
     private lateinit var btnGoogle: Button
+    private lateinit var loginButtonFB : LoginButton
 
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var facebookPresenter : LoginFacebookPresenter
@@ -55,17 +53,19 @@ class LoginFragment : Fragment(), LoginView.LoginUserView {
 
         auth = FirebaseAuth.getInstance()
 
+        btnFacebook = v.btn_login_facebook
         if (auth.currentUser == null) {
             FacebookSdk.sdkInitialize(context)
-            btnFacebook = v.btn_login_facebook
+            loginButtonFB = v.login_button_facebook
         }
         facebookPresenter = LoginFacebookPresenter(this)
         facebookPresenter.initFB()
-        btnFacebook.setReadPermissions(Arrays.asList("email"))
-        btnFacebook.setFragment(this)
+        loginButtonFB.setReadPermissions(Arrays.asList("email"))
+        loginButtonFB.setFragment(this)
 
-        btnFacebook.setOnClickListener { v ->
-            facebookPresenter.onButtonClicked(v)
+        btnFacebook.setOnClickListener {
+            loginButtonFB.performClick()
+            facebookPresenter.onButtonClicked(activity)
         }
 
 

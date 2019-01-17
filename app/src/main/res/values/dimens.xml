@@ -9,4 +9,5 @@
     <dimen name="length5dp">5dp</dimen>
     <dimen name="length30dp">30dp</dimen>
     <dimen name="length200dp">200dp</dimen>
+    <dimen name="length40dp">40dp</dimen>
 </resources>

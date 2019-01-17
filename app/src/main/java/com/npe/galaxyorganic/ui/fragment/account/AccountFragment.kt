@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.facebook.login.widget.LoginButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.npe.galaxyorganic.R
@@ -27,6 +28,7 @@ class AccountFragment : Fragment() {
     private lateinit var imgProfile : CircleImageView
     private lateinit var auth : FirebaseAuth
     private lateinit var user : FirebaseUser
+    private lateinit var buttonLoginFB : LoginButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
