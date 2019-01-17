@@ -21,17 +21,22 @@ import com.npe.galaxyorganic.ui.view.ShopView
 import kotlinx.android.synthetic.main.fragment_shop.view.*
 import java.text.SimpleDateFormat
 import java.util.*
+import android.widget.DatePicker
+
+
 
 class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
+
 
     private lateinit var recyclerMenu: RecyclerView
     private lateinit var recyclerItem: RecyclerView
     private lateinit var mAdapterMenu: AdapterShopFragment
     private lateinit var mAdapterItem: AdapterShopItemFragment
     private lateinit var buttonDate: Button
-    private lateinit var calender: Calendar
     private lateinit var datePicker: DatePickerDialog
     private lateinit var spinnerArea: Spinner
+    private lateinit var presenterItem : ShopItemPresenter
+    private lateinit var presenterMenu : ShopMenuPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,31 +49,14 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
         buttonDate = v.btn_dateShipping_shop
         spinnerArea = v.drop_shippingArea_shop
 
-        val presenterItem = ShopItemPresenter(this, requireContext())
-        val presenterMenu = ShopMenuPresenter(this, requireContext())
+        presenterItem = ShopItemPresenter(this, requireContext())
+        presenterMenu = ShopMenuPresenter(this, requireContext())
 
         //date shipping
         buttonDate.setOnClickListener {
-            calender = Calendar.getInstance()
-            val day: Int = calender.get(Calendar.DAY_OF_MONTH)
-            val month: Int = calender.get(Calendar.MONTH)
-            val year: Int = calender.get(Calendar.YEAR)
-
-            datePicker = DatePickerDialog(
-                context,
-                DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    var sdf = SimpleDateFormat("dd/MMM/yyyy")
-                    calender.set(year, monthOfYear, dayOfMonth)
-                    var dateString : String = sdf.format(calender.time)
-                    buttonDate.text = dateString
-                    //buttonDate.text = """$dayOfMonth-${monthOfYear + 1}-$year"""
-                },
-                year,
-                month,
-                day
-            )
-            datePicker.show()
+            presenterItem.onDatePickerClicked()
         }
+
         //area shipping
         var dataArea = ArrayAdapter.createFromResource(context, R.array.area_shipping, android.R.layout.simple_spinner_dropdown_item)
         dataArea.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -105,6 +93,19 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
         recyclerItem.layoutManager = GridLayoutManager(activity, 2)
         mAdapterItem = AdapterShopItemFragment(requireContext(), data)
         recyclerItem.adapter = mAdapterItem
+    }
+
+    override fun setDateText(date: String) {
+        //buttonDate.text = """$dayOfMonth-${monthOfYear + 1}-$year"""
+        buttonDate.text = date
+    }
+
+    override fun displayDatePickerDialog(year: Int, month: Int, day: Int) {
+        datePicker = DatePickerDialog(context, DatePickerDialog.OnDateSetListener{
+            view,tahun, bulan, hari ->
+            presenterItem.setDate(tahun, bulan, hari)
+        }, year, month, day)
+        datePicker.show()
     }
 
 }

@@ -9,6 +9,8 @@ interface ShopView {
     }
 
     interface ShopItemView{
+        fun setDateText(date : String)
+        fun displayDatePickerDialog(year : Int, month : Int, day : Int)
         fun dataItem(data : List<ShopItemModel>)
     }
 
@@ -17,6 +19,8 @@ interface ShopView {
     }
 
     interface ListAllItemView{
+        fun onDatePickerClicked()
+        fun setDate(year : Int, month : Int, day : Int)
         fun getAllItem()
     }
 }
