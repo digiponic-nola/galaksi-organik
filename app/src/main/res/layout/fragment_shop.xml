@@ -12,14 +12,15 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/length50dp">
-        <Spinner
+        <Button
+                android:background="@android:color/transparent"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textAlignment="center"
-                android:id="@+id/drop_shippingArea_shop"
-                android:spinnerMode="dropdown"
+                android:id="@+id/btn_areaShipping_shop"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
-        </Spinner>
+        </Button>
 
         <Button
                 android:background="@android:color/transparent"

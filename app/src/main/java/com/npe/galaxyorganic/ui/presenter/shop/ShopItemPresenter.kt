@@ -1,19 +1,17 @@
 package com.npe.galaxyorganic.ui.presenter.shop
 
 import android.content.Context
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.model.ShopItemModel
 import com.npe.galaxyorganic.ui.view.ShopView
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class ShopItemPresenter(val view: ShopView.ShopItemView, val context: Context) : ShopView.ListAllItemView {
 
 
     private var listItem = mutableListOf<ShopItemModel>()
+    var checkedItem : Int = 0
 
     override fun getAllItem() {
         //nama barang
@@ -65,13 +63,13 @@ class ShopItemPresenter(val view: ShopView.ShopItemView, val context: Context) :
     }
 
     override fun onAreaPickerClicked() {
-        var dataArea = ArrayAdapter.createFromResource(context, R.array.area_shipping, android.R.layout.simple_spinner_dropdown_item)
-        dataArea.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        view.displayAreaDialog(dataArea)
+        val items = arrayOf("Malang", "Batu")
+        view.displayAreaDialog(items, checkedItem)
     }
 
-    override fun setArea(parent: AdapterView<*>?, viewShop: View?, position: Int, id: Long) {
-        var item : String = parent?.getItemAtPosition(position).toString()
-        view.setAreaText(item)
+    override fun setArea(area: String) {
+        view.setAreaText(area)
     }
 }
+
+

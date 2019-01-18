@@ -1,9 +1,9 @@
 package com.npe.galaxyorganic.ui.fragment.shop
 
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
-import android.graphics.Color
-import android.graphics.PorterDuff
+import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -31,9 +31,10 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
     private lateinit var mAdapterItem: AdapterShopItemFragment
     private lateinit var buttonDate: Button
     private lateinit var datePicker: DatePickerDialog
-    private lateinit var spinnerArea: Spinner
+    private lateinit var buttonArea : Button
     private lateinit var presenterItem : ShopItemPresenter
     private lateinit var presenterMenu : ShopMenuPresenter
+    private lateinit var areaAlert : AlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +45,7 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
         recyclerMenu = v.recycler_menu_shop
         recyclerItem = v.recycler_all_list_shop
         buttonDate = v.btn_dateShipping_shop
-        spinnerArea = v.drop_shippingArea_shop
+        buttonArea = v.btn_areaShipping_shop
 
         presenterItem = ShopItemPresenter(this, requireContext())
         presenterMenu = ShopMenuPresenter(this, requireContext())
@@ -55,9 +56,9 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
         }
 
         //area shipping
-        presenterItem.onAreaPickerClicked()
-
-
+        buttonArea.setOnClickListener {
+            presenterItem.onAreaPickerClicked()
+        }
 
         presenterMenu.getDataMenu()
 
@@ -92,23 +93,26 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
         datePicker.show()
     }
 
-    override fun displayAreaDialog(dataArea: ArrayAdapter<CharSequence>) {
-        spinnerArea.adapter = dataArea
-        spinnerArea.getBackground().setColorFilter(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
-        spinnerArea.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                presenterItem.setArea(parent, view,position, id)
+    override fun displayAreaDialog(items: Array<String>, checkedItem: Int) {
+        buttonArea.text = items[checkedItem]
+        val builder : AlertDialog.Builder = AlertDialog.Builder(context)
+        builder.setTitle("Area")
+            .setSingleChoiceItems(items, checkedItem){
+                    dialog: DialogInterface?, which: Int ->
+                presenterItem.checkedItem = which
+                presenterItem.setArea(items[which])
+                dialog?.dismiss()
             }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
+            .setNeutralButton("Cancel"){
+                    dialog, which ->
+                dialog.cancel()
             }
-
-        }
-
+        val mDialog = builder.create()
+        mDialog.show()
     }
 
     override fun setAreaText(area: String) {
         //set area shipping
+        buttonArea.text = area
     }
 }
