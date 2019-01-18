@@ -7,8 +7,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="shop">Shop</string>
-    <string name="header_login">Login untuk memudahkan anda melacak order</string>
-    <string name="descr_login">Anda dapat dengan mudah melakukan login dengan social media</string>
+    <string name="header_login">Sign up below to create a secure account</string>
+    <string name="descr_login"></string>
     <string name="facebook">Facebook</string>
     <string name="google">Google</string>
     <!-- Facebook login -->
@@ -23,6 +23,7 @@
     <string name="help">Help</string>
     <string name="logout">Log Out</string>
     <string name="email">email</string>
+    <string name="app_version">App Version 0.01</string>
 
     <!-- array menu shop -->
     <string-array name="menu_shop">
