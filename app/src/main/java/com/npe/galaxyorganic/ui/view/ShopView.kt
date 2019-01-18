@@ -12,9 +12,9 @@ interface ShopView {
         fun setDateText(date: String)
         fun setAreaText(area: String)
         fun displayDatePickerDialog(year: Int, month: Int, day: Int)
-        fun displayAreaDialog(items: Array<String>, checkedItem: Int)
+        fun displayAreaDialog(itemData: Array<String?>, checkedItem: Int)
         fun dataItem(data: List<DatumShopItemModel>)
-        fun failedGetProduct()
+        fun failedGetProduct(error: String)
     }
 
     interface ShopMenuPresenterView {

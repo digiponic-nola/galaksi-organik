@@ -14,7 +14,6 @@ import android.view.ViewGroup
 import android.widget.*
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.model.DatumShopItemModel
-import com.npe.galaxyorganic.ui.model.RootShopItemModel
 import com.npe.galaxyorganic.ui.model.ShopMenuModel
 import com.npe.galaxyorganic.ui.presenter.shop.ShopItemPresenter
 import com.npe.galaxyorganic.ui.presenter.shop.ShopMenuPresenter
@@ -65,7 +64,7 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
         return v
     }
 
-    override fun failedGetProduct() {
+    override fun failedGetProduct(s: String) {
         Toast.makeText(context, "Gagal Menampilkan Product", Toast.LENGTH_SHORT).show()
     }
 
@@ -94,13 +93,13 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
         datePicker.show()
     }
 
-    override fun displayAreaDialog(items: Array<String>, checkedItem: Int) {
+    override fun displayAreaDialog(itemData: Array<String?>, checkedItem: Int) {
         val builder : AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setTitle("Area")
-            .setSingleChoiceItems(items, checkedItem){
+            .setSingleChoiceItems(itemData, checkedItem){
                     dialog: DialogInterface?, which: Int ->
                 presenterItem.checkedItem = which
-                presenterItem.setArea(items[which])
+                presenterItem.setArea(itemData[which].toString())
                 dialog?.dismiss()
             }
             .setNeutralButton("Cancel"){
