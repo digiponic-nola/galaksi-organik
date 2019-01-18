@@ -36,6 +36,16 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+
+        <Button
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:text="@string/beli"
+                android:layout_marginTop="@dimen/length30dp"
+                android:background="@color/colorGreenSoft"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/length50dp"/>
     </LinearLayout>
 
 </android.support.v7.widget.CardView>
