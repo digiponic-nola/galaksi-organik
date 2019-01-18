@@ -94,7 +94,6 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
     }
 
     override fun displayAreaDialog(items: Array<String>, checkedItem: Int) {
-        buttonArea.text = items[checkedItem]
         val builder : AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setTitle("Area")
             .setSingleChoiceItems(items, checkedItem){
