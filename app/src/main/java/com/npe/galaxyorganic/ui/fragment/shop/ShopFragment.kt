@@ -14,7 +14,7 @@ import android.view.ViewGroup
 import android.widget.*
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.model.DatumShopItemModel
-import com.npe.galaxyorganic.ui.model.ShopMenuModel
+import com.npe.galaxyorganic.ui.model.DatumShopMenuModel
 import com.npe.galaxyorganic.ui.presenter.shop.ShopItemPresenter
 import com.npe.galaxyorganic.ui.presenter.shop.ShopMenuPresenter
 import com.npe.galaxyorganic.ui.view.ShopView
@@ -68,7 +68,7 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
         Toast.makeText(context, "Gagal Menampilkan Product", Toast.LENGTH_SHORT).show()
     }
 
-    override fun dataMenu(data: List<ShopMenuModel>) {
+    override fun dataMenu(data: ArrayList<DatumShopMenuModel>) {
         recyclerMenu.layoutManager = GridLayoutManager(this!!.activity, 4)
         mAdapterMenu = AdapterShopFragment(requireContext(), data)
         recyclerMenu.adapter = mAdapterMenu
@@ -114,4 +114,9 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
         //set area shipping
         buttonArea.text = area
     }
+
+    override fun failedMenu(error: String) {
+        Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+    }
+
 }

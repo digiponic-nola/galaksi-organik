@@ -2,6 +2,7 @@
 
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_menuShop"
         android:layout_margin="@dimen/length5dp"
         android:orientation="vertical"
         android:layout_width="@dimen/length100dp"

@@ -8,8 +8,8 @@
         tools:context=".ui.activity.SplashScreen">
 
     <ImageView
-            android:src="@drawable/logogalaksiorganik"
+            android:src="@drawable/logogook"
             android:layout_centerInParent="true"
-            android:layout_width="@dimen/length100dp"
+            android:layout_width="@dimen/length300dp"
             android:layout_height="@dimen/length100dp"/>
 </RelativeLayout>

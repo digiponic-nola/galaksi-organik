@@ -24,14 +24,15 @@
     <string name="logout">Log Out</string>
     <string name="email">email</string>
     <string name="app_version">App Version 0.01</string>
+    <string name="title">Title</string>
 
     <!-- array menu shop -->
     <string-array name="menu_shop">
-        <item>Makanan</item>
+        <item>Meat</item>
         <item>Sayur</item>
         <item>Beras</item>
         <item>Jus</item>
-        <item>Ikan</item>
+        <item>Fish</item>
     </string-array>
 
     <!-- array area shipping-->
