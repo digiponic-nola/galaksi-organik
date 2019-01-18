@@ -16,7 +16,6 @@
 
         <ImageView
                 android:id="@+id/imgv_listItem_shop"
-                android:background="@color/colorAccent"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/length150dp"/>
 

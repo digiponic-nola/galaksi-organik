@@ -1,30 +1,31 @@
 package com.npe.galaxyorganic.ui.view
 
-import com.npe.galaxyorganic.ui.model.ShopItemModel
+import com.npe.galaxyorganic.ui.model.DatumShopItemModel
 import com.npe.galaxyorganic.ui.model.ShopMenuModel
 
 interface ShopView {
-    interface ShopMenuView{
-        fun dataMenu(data : List<ShopMenuModel>)
+    interface ShopMenuView {
+        fun dataMenu(data: List<ShopMenuModel>)
     }
 
-    interface ShopItemView{
-        fun setDateText(date : String)
-        fun setAreaText(area : String)
-        fun displayDatePickerDialog(year : Int, month : Int, day : Int)
+    interface ShopItemView {
+        fun setDateText(date: String)
+        fun setAreaText(area: String)
+        fun displayDatePickerDialog(year: Int, month: Int, day: Int)
         fun displayAreaDialog(items: Array<String>, checkedItem: Int)
-        fun dataItem(data : List<ShopItemModel>)
+        fun dataItem(data: List<DatumShopItemModel>)
+        fun failedGetProduct()
     }
 
-    interface ShopMenuPresenterView{
+    interface ShopMenuPresenterView {
         fun getDataMenu()
     }
 
-    interface ListAllItemView{
+    interface ListAllItemView {
         fun onDatePickerClicked()
         fun onAreaPickerClicked()
         fun setArea(area: String)
-        fun setDate(year : Int, month : Int, day : Int)
+        fun setDate(year: Int, month: Int, day: Int)
         fun getAllItem()
     }
 }

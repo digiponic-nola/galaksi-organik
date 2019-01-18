@@ -13,7 +13,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.npe.galaxyorganic.R
-import com.npe.galaxyorganic.ui.model.ShopItemModel
+import com.npe.galaxyorganic.ui.model.DatumShopItemModel
+import com.npe.galaxyorganic.ui.model.RootShopItemModel
 import com.npe.galaxyorganic.ui.model.ShopMenuModel
 import com.npe.galaxyorganic.ui.presenter.shop.ShopItemPresenter
 import com.npe.galaxyorganic.ui.presenter.shop.ShopMenuPresenter
@@ -22,8 +23,6 @@ import kotlinx.android.synthetic.main.fragment_shop.view.*
 
 
 class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
-
-
 
     private lateinit var recyclerMenu: RecyclerView
     private lateinit var recyclerItem: RecyclerView
@@ -34,7 +33,6 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
     private lateinit var buttonArea : Button
     private lateinit var presenterItem : ShopItemPresenter
     private lateinit var presenterMenu : ShopMenuPresenter
-    private lateinit var areaAlert : AlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,6 +65,9 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
         return v
     }
 
+    override fun failedGetProduct() {
+        Toast.makeText(context, "Gagal Menampilkan Product", Toast.LENGTH_SHORT).show()
+    }
 
     override fun dataMenu(data: List<ShopMenuModel>) {
         recyclerMenu.layoutManager = GridLayoutManager(this!!.activity, 4)
@@ -74,7 +75,7 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
         recyclerMenu.adapter = mAdapterMenu
     }
 
-    override fun dataItem(data: List<ShopItemModel>) {
+    override fun dataItem(data: List<DatumShopItemModel>) {
         recyclerItem.layoutManager = GridLayoutManager(activity, 2)
         mAdapterItem = AdapterShopItemFragment(requireContext(), data)
         recyclerItem.adapter = mAdapterItem
