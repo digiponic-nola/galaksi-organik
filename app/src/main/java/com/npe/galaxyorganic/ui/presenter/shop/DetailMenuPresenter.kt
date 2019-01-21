@@ -23,8 +23,9 @@ class DetailMenuPresenter(val context: Context, val view: ShopView.DetailMenuVie
             override fun onResponse(call: Call<RootShopDetailMenuModel>, response: Response<RootShopDetailMenuModel>) {
                 var dataResponse = response.body()
                 if (dataResponse != null) {
-                        Log.d("PresenterDetailMenu", "MasukMessage")
                     if (dataResponse.api_message.equals("success")) {
+                        Log.d("PresenterDetailMenu", "MasukMessage")
+                        Log.d("DataDetail", dataResponse.data.toString())
                         listProduct = dataResponse.data as ArrayList<DatumShopDetailMenuModel>
                         view.dataItem(listProduct)
                     }

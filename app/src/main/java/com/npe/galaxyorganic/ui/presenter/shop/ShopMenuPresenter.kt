@@ -11,9 +11,7 @@ import retrofit2.Response
 
 class ShopMenuPresenter(private val view: ShopView.ShopMenuView, private val context: Context) :
     ShopView.ShopMenuPresenterView {
-
-    private val listMenu = mutableListOf<RootShopMenuModel>()
-
+    
     override fun getDataMenu() {
         val category = ApiRespository.create()
         var listCategory: ArrayList<DatumShopMenuModel> = arrayListOf()
