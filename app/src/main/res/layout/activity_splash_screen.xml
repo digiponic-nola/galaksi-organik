@@ -4,12 +4,12 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorGreenSoft"
+        android:background="@color/colorWhite"
         tools:context=".ui.activity.SplashScreen">
 
     <ImageView
-            android:src="@drawable/logogook"
+            android:src="@drawable/logoyuji"
             android:layout_centerInParent="true"
-            android:layout_width="@dimen/length300dp"
-            android:layout_height="@dimen/length100dp"/>
+            android:layout_width="@dimen/length400dp"
+            android:layout_height="@dimen/length150dp"/>
 </RelativeLayout>

@@ -38,6 +38,7 @@
                 android:layout_height="wrap_content"/>
 
         <Button
+                android:id="@+id/btn_beliItemShop"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"

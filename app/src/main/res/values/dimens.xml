@@ -11,4 +11,5 @@
     <dimen name="length200dp">200dp</dimen>
     <dimen name="length40dp">40dp</dimen>
     <dimen name="length300dp">300dp</dimen>
+    <dimen name="length400dp">400dp</dimen>
 </resources>

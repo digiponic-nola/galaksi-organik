@@ -28,6 +28,9 @@
     <string name="beli">Buy</string>
     <string name="login_first">you have to login first</string>
 
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, asperiores aut commodi consequuntur cupiditate dolorem dolorum ducimus et harum inventore labore nihil porro quas quasi quia suscipit tempora vero voluptates!</string>
+    <string name="category">Category</string>
+
     <!-- array menu shop -->
     <string-array name="menu_shop">
         <item>Meat</item>

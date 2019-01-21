@@ -6,7 +6,7 @@
 
     <application
             android:allowBackup="true"
-            android:icon="@drawable/logogalaksiorganik"
+            android:icon="@drawable/icon_youji"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
@@ -27,6 +27,8 @@
         <activity android:name=".ui.activity.MainActivity">
         </activity>
         <activity android:name=".ui.fragment.shop.DetailMenu.DetailMenuShopActivity">
+        </activity>
+        <activity android:name=".ui.activity.shop.DetailItemShopActivity">
         </activity>
     </application>
 
