@@ -2,7 +2,6 @@ package com.npe.galaxyorganic.ui.fragment.shop
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,8 +13,6 @@ import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.activity.shop.DetailItemShopActivity
 import com.npe.galaxyorganic.ui.model.DatumShopItemModel
 import kotlinx.android.synthetic.main.list_item_shop.view.*
-import retrofit2.converter.gson.GsonConverterFactory
-import java.io.Serializable
 
 class AdapterShopItemFragment(val context : Context, val items : List<DatumShopItemModel>) : RecyclerView.Adapter<AdapterShopItemFragment.ViewHolder>(){
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
@@ -37,17 +34,17 @@ class AdapterShopItemFragment(val context : Context, val items : List<DatumShopI
         p0.hargaBarang?.text = "Rp "+list.sell_price
 
         p0.btnBeli.setOnClickListener {
-            toDetailItem(context, list)
+            var gson = Gson()
+            var jsonString = gson.toJson(list)
+            toDetailItem(context, jsonString)
         }
 
     }
 
-    private fun toDetailItem(context: Context, list: DatumShopItemModel) {
+    private fun toDetailItem(context: Context, list: String) {
         val intent = Intent(context, DetailItemShopActivity::class.java)
-        intent.putExtra("Image", list.image)
-        intent.putExtra("NamaBarang", list.name)
-        intent.putExtra("HargaBarang", list.sell_price)
-        intent.putExtra("DetailBarang", list.description)
+        Log.d("DataItem", list)
+        intent.putExtra("DataItem", list)
         context.startActivity(intent)
     }
 
