@@ -33,6 +33,7 @@ class AdapterShopFragment(val context : Context, val items : List<DatumShopMenuM
 
         p0.cardMenu.setOnClickListener {
             val intent = Intent(context, DetailMenuShopActivity::class.java)
+            intent.putExtra("idCategory", list.id)
             intent.putExtra("Category", list.name)
             context.startActivity(intent)
         }

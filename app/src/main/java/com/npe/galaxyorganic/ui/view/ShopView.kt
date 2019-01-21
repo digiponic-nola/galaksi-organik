@@ -1,5 +1,6 @@
 package com.npe.galaxyorganic.ui.view
 
+import com.npe.galaxyorganic.ui.model.DatumShopDetailMenuModel
 import com.npe.galaxyorganic.ui.model.DatumShopItemModel
 import com.npe.galaxyorganic.ui.model.DatumShopMenuModel
 
@@ -31,7 +32,7 @@ interface ShopView {
     }
     interface DetailMenuView{
         fun failed(error : String)
-        fun dataItem(listProduct: ArrayList<DatumShopItemModel>)
+        fun dataItem(listProduct: ArrayList<DatumShopDetailMenuModel>)
     }
 
     interface ShopMenuDetailView{
