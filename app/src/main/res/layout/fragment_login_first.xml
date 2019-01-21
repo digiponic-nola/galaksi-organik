@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:gravity="center"
+              tools:context=".ui.fragment.LoginFirstFragment">
+
+
+    <ImageView
+            android:src="@drawable/icon_shopping_basket"
+            android:scaleType="centerCrop"
+            android:layout_width="@dimen/length100dp"
+            android:layout_height="@dimen/length100dp"/>
+
+    <TextView
+            android:textStyle="bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:text="@string/login_first"
+            android:layout_margin="@dimen/length10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    <Button
+            android:background="@color/colorGreenSoft"
+            android:id="@+id/btn_toLogin"
+            android:layout_width="@dimen/length200dp"
+            android:layout_height="@dimen/length50dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:text="@string/login"/>
+
+</LinearLayout>

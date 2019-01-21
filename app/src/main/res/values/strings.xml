@@ -26,6 +26,7 @@
     <string name="app_version">App Version 0.01</string>
     <string name="title">Title</string>
     <string name="beli">Buy</string>
+    <string name="login_first">you have to login first</string>
 
     <!-- array menu shop -->
     <string-array name="menu_shop">
