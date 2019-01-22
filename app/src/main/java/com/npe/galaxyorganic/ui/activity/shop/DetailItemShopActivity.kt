@@ -24,8 +24,7 @@ class DetailItemShopActivity : AppCompatActivity() {
         }
         Glide.with(applicationContext)
             .load(dataItem.image)
-            .into(imgv_detailBarang)
-
+            .into(imgToolbar)
         tv_namaBarang_detailBarang.text = dataItem.name
         tv_hargaBarang_detailBarang.text = dataItem.sell_price
         tv_desc_detailBarang.text = dataItem.description
