@@ -7,6 +7,8 @@ import com.bumptech.glide.Glide
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.model.DatumShopItemModel
 import com.npe.galaxyorganic.ui.presenter.shop.DetailItemPresenter
+import com.npe.galaxyorganic.ui.utils.gone
+import com.npe.galaxyorganic.ui.utils.visible
 import com.npe.galaxyorganic.ui.view.ShopView
 import kotlinx.android.synthetic.main.activity_detail_item_shop.*
 
@@ -34,8 +36,8 @@ class DetailItemShopActivity : AppCompatActivity(), ShopView.DetailItemShopView 
     }
 
     private fun showLayoutAddCart() {
-        btn_addToCart_detailItem.visibility = View.GONE
-        layout_addToCart_detailItem.visibility = View.VISIBLE
+        btn_addToCart_detailItem.gone()
+        layout_addToCart_detailItem.visible()
 
         if(layout_addToCart_detailItem.visibility == View.VISIBLE){
 
