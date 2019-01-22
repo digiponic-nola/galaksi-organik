@@ -44,10 +44,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.menu_login -> {
                     val user = auth.currentUser
                     item.setCheckable(true)
-                    if (user != null) {
-                        loadAccountFragment(savedInstanceState)
-                    } else {
+                    if (user == null) {
                         loadLoginFragment(savedInstanceState)
+                    } else {
+                        loadAccountFragment(savedInstanceState)
                     }
                 }
             }
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadAccountFragment(savedInstanceState: Bundle?) {
-        if (savedInstanceState != null) {
+        if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_frame, AccountFragment(), AccountFragment::class.java.simpleName)
