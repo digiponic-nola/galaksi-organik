@@ -38,4 +38,12 @@ interface ShopView {
     interface ShopMenuDetailView{
         fun getProduct(categories_id : Int)
     }
+
+    interface DetailItemShopView{
+        fun getDataDetailItem(data: DatumShopItemModel)
+    }
+
+    interface DetailItemPresenterView{
+        fun getDetailItemFromProduct(jsonString: String)
+    }
 }
