@@ -16,7 +16,7 @@
         <android.support.design.widget.CollapsingToolbarLayout
                 app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
                 app:contentScrim="@color/colorGreenSoft"
-                app:title="@string/app_name"
+                android:id="@+id/collapsingToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
