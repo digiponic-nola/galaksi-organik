@@ -13,8 +13,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.npe.galaxyorganic.R
-import com.npe.galaxyorganic.ui.model.DatumShopItemModel
-import com.npe.galaxyorganic.ui.model.DatumShopMenuModel
+import com.npe.galaxyorganic.ui.model.datum.DatumShopItemModel
+import com.npe.galaxyorganic.ui.model.datum.DatumShopMenuModel
 import com.npe.galaxyorganic.ui.presenter.shop.ShopItemPresenter
 import com.npe.galaxyorganic.ui.presenter.shop.ShopMenuPresenter
 import com.npe.galaxyorganic.ui.view.ShopView

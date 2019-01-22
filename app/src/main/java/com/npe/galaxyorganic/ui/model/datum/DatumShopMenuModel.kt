@@ -1,4 +1,4 @@
-package com.npe.galaxyorganic.ui.model
+package com.npe.galaxyorganic.ui.model.datum
 
 import com.google.gson.annotations.SerializedName
 

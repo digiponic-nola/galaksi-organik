@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.bumptech.glide.Glide
 import com.npe.galaxyorganic.R
-import com.npe.galaxyorganic.ui.model.DatumShopItemModel
+import com.npe.galaxyorganic.ui.model.datum.DatumShopItemModel
 import com.npe.galaxyorganic.ui.presenter.shop.DetailItemPresenter
 import com.npe.galaxyorganic.ui.utils.gone
 import com.npe.galaxyorganic.ui.utils.visible

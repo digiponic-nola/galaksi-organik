@@ -1,6 +1,7 @@
-package com.npe.galaxyorganic.ui.model
+package com.npe.galaxyorganic.ui.model.root
 
 import com.google.gson.annotations.SerializedName
+import com.npe.galaxyorganic.ui.model.datum.DatumShopItemModel
 
 data class RootShopItemModel(
     @SerializedName("api_status")

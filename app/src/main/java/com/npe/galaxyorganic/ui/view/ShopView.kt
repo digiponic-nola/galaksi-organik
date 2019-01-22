@@ -1,8 +1,8 @@
 package com.npe.galaxyorganic.ui.view
 
-import com.npe.galaxyorganic.ui.model.DatumShopDetailMenuModel
-import com.npe.galaxyorganic.ui.model.DatumShopItemModel
-import com.npe.galaxyorganic.ui.model.DatumShopMenuModel
+import com.npe.galaxyorganic.ui.model.datum.DatumShopDetailMenuModel
+import com.npe.galaxyorganic.ui.model.datum.DatumShopItemModel
+import com.npe.galaxyorganic.ui.model.datum.DatumShopMenuModel
 
 interface ShopView {
     interface ShopMenuView {

@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.activity.shop.DetailItemShopActivity
-import com.npe.galaxyorganic.ui.model.DatumShopItemModel
+import com.npe.galaxyorganic.ui.model.datum.DatumShopItemModel
 import kotlinx.android.synthetic.main.list_item_shop.view.*
 
 class AdapterShopItemFragment(val context : Context, val items : List<DatumShopItemModel>) : RecyclerView.Adapter<AdapterShopItemFragment.ViewHolder>(){

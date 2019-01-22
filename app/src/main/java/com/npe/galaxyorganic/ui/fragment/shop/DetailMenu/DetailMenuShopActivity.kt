@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.widget.Toast
 import com.npe.galaxyorganic.R
-import com.npe.galaxyorganic.ui.model.DatumShopDetailMenuModel
+import com.npe.galaxyorganic.ui.model.datum.DatumShopDetailMenuModel
 import com.npe.galaxyorganic.ui.presenter.shop.DetailMenuPresenter
 import com.npe.galaxyorganic.ui.view.ShopView
 import kotlinx.android.synthetic.main.activity_detail_menu_shop.*

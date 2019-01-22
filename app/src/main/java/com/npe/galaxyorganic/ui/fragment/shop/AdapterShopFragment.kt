@@ -9,8 +9,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.fragment.shop.DetailMenu.DetailMenuShopActivity
-import com.npe.galaxyorganic.ui.model.DatumShopMenuModel
-import com.npe.galaxyorganic.ui.model.RootShopMenuModel
+import com.npe.galaxyorganic.ui.model.datum.DatumShopMenuModel
 import kotlinx.android.synthetic.main.list_menu_shop.view.*
 
 class AdapterShopFragment(val context : Context, val items : List<DatumShopMenuModel>) : RecyclerView.Adapter<AdapterShopFragment.ViewHolder>(){

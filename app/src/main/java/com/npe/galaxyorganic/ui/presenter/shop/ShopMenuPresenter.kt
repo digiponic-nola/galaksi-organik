@@ -1,8 +1,8 @@
 package com.npe.galaxyorganic.ui.presenter.shop
 
 import android.content.Context
-import com.npe.galaxyorganic.ui.model.DatumShopMenuModel
-import com.npe.galaxyorganic.ui.model.RootShopMenuModel
+import com.npe.galaxyorganic.ui.model.datum.DatumShopMenuModel
+import com.npe.galaxyorganic.ui.model.root.RootShopMenuModel
 import com.npe.galaxyorganic.ui.model.api.ApiRespository
 import com.npe.galaxyorganic.ui.view.ShopView
 import retrofit2.Call

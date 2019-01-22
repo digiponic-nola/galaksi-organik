@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.npe.galaxyorganic.R
-import com.npe.galaxyorganic.ui.model.DatumShopDetailMenuModel
-import com.npe.galaxyorganic.ui.model.DatumShopItemModel
+import com.npe.galaxyorganic.ui.model.datum.DatumShopDetailMenuModel
 import kotlinx.android.synthetic.main.list_detail_menu_shop.view.*
-import kotlinx.android.synthetic.main.list_item_shop.view.*
 
 class AdapterDetailMenuShop(
     val context: Context,

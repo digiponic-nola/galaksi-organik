@@ -1,11 +1,10 @@
 package com.npe.galaxyorganic.ui.presenter.shop
 
 import android.content.Context
-import android.util.Log
-import com.npe.galaxyorganic.ui.model.DatumCitiesModel
-import com.npe.galaxyorganic.ui.model.DatumShopItemModel
-import com.npe.galaxyorganic.ui.model.RootCitiesModel
-import com.npe.galaxyorganic.ui.model.RootShopItemModel
+import com.npe.galaxyorganic.ui.model.datum.DatumCitiesModel
+import com.npe.galaxyorganic.ui.model.datum.DatumShopItemModel
+import com.npe.galaxyorganic.ui.model.root.RootCitiesModel
+import com.npe.galaxyorganic.ui.model.root.RootShopItemModel
 import com.npe.galaxyorganic.ui.model.api.ApiRespository
 import com.npe.galaxyorganic.ui.view.ShopView
 import retrofit2.Call

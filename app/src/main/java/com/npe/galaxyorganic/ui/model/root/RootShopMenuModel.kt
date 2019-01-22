@@ -1,14 +1,15 @@
-package com.npe.galaxyorganic.ui.model
+package com.npe.galaxyorganic.ui.model.root
 
 import com.google.gson.annotations.SerializedName
+import com.npe.galaxyorganic.ui.model.datum.DatumShopMenuModel
 
-data class RootCitiesModel(
+data class RootShopMenuModel(
     @SerializedName("api_status")
     val api_status : Int?,
     @SerializedName("api_message")
     val api_message : String?,
     @SerializedName("api_authorization")
-    val api_authorization : String?,
+    val api_authorization :String?,
     @SerializedName("data")
-    val data : List<DatumCitiesModel>
+    val data : List<DatumShopMenuModel>
 )
