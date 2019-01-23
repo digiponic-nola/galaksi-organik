@@ -4,6 +4,7 @@ package com.npe.galaxyorganic.ui.fragment.login
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +13,6 @@ import android.widget.Toast
 import com.facebook.*
 import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.*
 import com.npe.galaxyorganic.R
@@ -26,20 +25,16 @@ import java.util.*
 
 
 class LoginFragment : Fragment(), LoginView.LoginUserView {
-
-
     private lateinit var btnFacebook: Button
     private lateinit var btnGoogle: Button
     private lateinit var loginButtonFB : LoginButton
 
-    private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var facebookPresenter : LoginFacebookPresenter
-    private lateinit var googlePresenter: LoginGooglePresenter
+    private lateinit var googlePresenter : LoginGooglePresenter
 
     private lateinit var auth: FirebaseAuth
 
     companion object {
-        lateinit var gso: GoogleSignInOptions
         private const val TAG = "GoogleActivity"
         private const val RC_SIGN_IN = 9001
     }
@@ -72,48 +67,35 @@ class LoginFragment : Fragment(), LoginView.LoginUserView {
         //google setting
         btnGoogle = v.btn_login_google
         googlePresenter = LoginGooglePresenter(this)
-        googlePresenter.configureGoogle(getString(R.string.default_web_client_id))
-
-        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-
+        googlePresenter.configureGoogle(getString(R.string.default_web_client_id), requireActivity())
         btnGoogle.setOnClickListener {
-            loginGoogle()
+            googlePresenter.loginGoogle()
         }
 
 
         return v
     }
 
-    override fun loginGoogle() {
-        val signInIntent = googleSignInClient.signInIntent
+    override fun startActivityForResult(signInIntent: Intent) {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (data != null) {
             facebookPresenter.onActivityResult(requestCode, resultCode, data)
         }
-        if (requestCode == RC_SIGN_IN) {
+        if(requestCode == RC_SIGN_IN){
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
+                Log.d("LOGIN_GOOGLE", "MASUK")
                 val account = task.getResult(ApiException::class.java)
-                googlePresenter.firebaseAuthWithGoogle(account, requireActivity())
-            } catch (e: ApiException) {
-                e.printStackTrace()
+                googlePresenter.firebaseAuthWithGoogle(account)
+            } catch (e : ApiException){
+                failedLogin(e.message)
             }
         }
-    }
 
-    override fun dataFromGoogle(user: FirebaseUser?) {
-        if (user != null) {
-            val intent = Intent(activity, MainActivity::class.java)
-            intent.putExtra("Nama", user.displayName)
-            startActivity(intent)
-        } else {
-            Toast.makeText(context, "user:null", Toast.LENGTH_SHORT).show()
-        }
     }
 
     override fun showLoading() {
@@ -124,20 +106,18 @@ class LoginFragment : Fragment(), LoginView.LoginUserView {
     }
     override fun successLogin() {
         Toast.makeText(context, "Selamat Datang "+auth.currentUser?.displayName, Toast.LENGTH_SHORT).show()
+        val intent = Intent(context, MainActivity::class.java)
+        startActivity(intent)
     }
 
     override fun failedLogin(message: String?) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
     }
 
 
     override fun onStart() {
         super.onStart()
-        if (auth.currentUser != null) {
-            dataFromGoogle(auth.currentUser)
-            val intent = Intent(activity, MainActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     override fun onResume() {

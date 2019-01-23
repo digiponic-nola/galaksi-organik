@@ -15,11 +15,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.activity.MainActivity
+import com.npe.galaxyorganic.ui.presenter.login.LoginGooglePresenter
+import com.npe.galaxyorganic.ui.view.LoginView
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_account.view.*
 
-class AccountFragment : Fragment() {
-
+class AccountFragment : Fragment(), LoginView.AccountUser{
     private lateinit var tvEmail : TextView
     private lateinit var tvNama : TextView
     private lateinit var btnPrivacyPolicy : Button
@@ -27,8 +28,8 @@ class AccountFragment : Fragment() {
     private lateinit var btnlogout : Button
     private lateinit var imgProfile : CircleImageView
     private lateinit var auth : FirebaseAuth
-    private lateinit var user : FirebaseUser
     private lateinit var buttonLoginFB : LoginButton
+    private lateinit var loginPresenter : LoginGooglePresenter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,27 +45,26 @@ class AccountFragment : Fragment() {
         btnlogout = v.btn_logout_account
         imgProfile = v.imgv_profile_account
 
+        loginPresenter = LoginGooglePresenter(this)
         auth = FirebaseAuth.getInstance()
-        user = auth.currentUser!!
-
-        tvEmail.text = user?.email
-        tvNama.text = user?.displayName
-        Glide.with(this!!.context!!)
-            .load(user?.photoUrl)
-            .into(imgProfile)
 
         btnlogout.setOnClickListener {
-            logOut()
+            loginPresenter.SignOut()
+            loginPresenter.revokeAccess()
+            val intent = Intent(context, MainActivity::class.java)
+            startActivity(intent)
         }
 
         return v
     }
 
-    private fun logOut() {
-        auth.signOut()
-        val intent = Intent(activity, MainActivity::class.java)
-        startActivity(intent)
+    override fun dataUser() {
+        val user = auth.currentUser
+        tvEmail.text = user?.email
+        tvNama.text = user?.displayName
+        Glide.with(requireActivity())
+            .load(user?.photoUrl)
+            .into(imgProfile)
     }
-
 
 }
