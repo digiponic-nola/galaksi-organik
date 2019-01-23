@@ -23,6 +23,7 @@ interface LoginView {
 
     interface LoginGoogleView {
         fun loginFrom(from : String)
+        fun setLoginDB()
         //facebook
         fun initFB()
         fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent)

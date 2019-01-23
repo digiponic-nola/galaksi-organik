@@ -1,12 +1,8 @@
 package com.npe.galaxyorganic.ui.model.api
 
-import com.npe.galaxyorganic.ui.model.root.RootCitiesModel
-import com.npe.galaxyorganic.ui.model.root.RootShopDetailMenuModel
-import com.npe.galaxyorganic.ui.model.root.RootShopItemModel
-import com.npe.galaxyorganic.ui.model.root.RootShopMenuModel
+import com.npe.galaxyorganic.ui.model.root.*
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService{
     @GET("products")
@@ -20,5 +16,8 @@ interface ApiService{
 
     @GET("categories")
     fun getListCategory(): Call<RootShopMenuModel>
+
+    @POST("customers")
+    fun getCustomers(@Body requestLogin : RequestLoginModel) : Call<RootLoginModel>
 
 }

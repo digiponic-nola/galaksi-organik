@@ -10,7 +10,6 @@ import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
-import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -18,15 +17,20 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
+import com.npe.galaxyorganic.ui.model.api.ApiRespository
+import com.npe.galaxyorganic.ui.model.root.RequestLoginModel
+import com.npe.galaxyorganic.ui.model.root.RootLoginModel
 import com.npe.galaxyorganic.ui.view.LoginView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginPresenter : LoginView.LoginGoogleView {
-
     var auth = FirebaseAuth.getInstance()
     lateinit var viewLogin: LoginView.LoginUserView
     lateinit var viewAccount: LoginView.AccountUser
     lateinit var mCallbackManager: CallbackManager
-    
+
     companion object {
         lateinit var googleSignInClient: GoogleSignInClient
         lateinit var gso: GoogleSignInOptions
@@ -64,7 +68,7 @@ class LoginPresenter : LoginView.LoginGoogleView {
         val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                viewLogin.successLogin()
+                setLoginDB()
             } else {
                 Log.w(TAG, "SignInWithCredentialFailure", task.exception)
                 viewLogin.failedLogin(task.exception?.message.toString())
@@ -107,11 +111,33 @@ class LoginPresenter : LoginView.LoginGoogleView {
         auth.signInWithCredential(credentialFacebook).addOnCompleteListener(object : OnCompleteListener<AuthResult> {
             override fun onComplete(p0: Task<AuthResult>) {
                 if (p0.isSuccessful) {
-                    viewLogin.successLogin()
+                    setLoginDB()
                 } else {
-
+                    viewLogin.failedLogin("Gagal Login Facebook")
                 }
             }
+        })
+    }
+
+    override fun setLoginDB() {
+        val user = auth.currentUser
+        val customers = ApiRespository.create()
+        val requset = RequestLoginModel(user?.displayName.toString(), user?.email.toString())
+        customers.getCustomers(requset).enqueue(object : Callback<RootLoginModel> {
+            override fun onFailure(call: Call<RootLoginModel>, t: Throwable) {
+                viewLogin.failedLogin("Gagal set DB")
+            }
+
+            override fun onResponse(call: Call<RootLoginModel>, response: Response<RootLoginModel>) {
+                var dataResponse = response.body()
+                if (dataResponse != null) {
+                    if (dataResponse.api_message.equals("success")) {
+                        Log.d("SetDB","BERHASIL")
+                        viewLogin.successLogin()
+                    }
+                }
+            }
+
         })
     }
 
