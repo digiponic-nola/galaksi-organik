@@ -12,10 +12,9 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.facebook.login.widget.LoginButton
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.activity.MainActivity
-import com.npe.galaxyorganic.ui.presenter.login.LoginGooglePresenter
+import com.npe.galaxyorganic.ui.presenter.login.LoginPresenter
 import com.npe.galaxyorganic.ui.view.LoginView
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_account.view.*
@@ -28,8 +27,7 @@ class AccountFragment : Fragment(), LoginView.AccountUser{
     private lateinit var btnlogout : Button
     private lateinit var imgProfile : CircleImageView
     private lateinit var auth : FirebaseAuth
-    private lateinit var buttonLoginFB : LoginButton
-    private lateinit var loginPresenter : LoginGooglePresenter
+    private lateinit var loginPresenter : LoginPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,8 +43,9 @@ class AccountFragment : Fragment(), LoginView.AccountUser{
         btnlogout = v.btn_logout_account
         imgProfile = v.imgv_profile_account
 
-        loginPresenter = LoginGooglePresenter(this)
+        loginPresenter = LoginPresenter(this)
         auth = FirebaseAuth.getInstance()
+        dataUser()
 
         btnlogout.setOnClickListener {
             loginPresenter.SignOut()

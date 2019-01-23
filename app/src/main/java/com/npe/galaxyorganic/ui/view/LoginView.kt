@@ -2,6 +2,7 @@ package com.npe.galaxyorganic.ui.view
 
 import android.content.Intent
 import android.support.v4.app.FragmentActivity
+import com.facebook.AccessToken
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseUser
 
@@ -18,14 +19,19 @@ interface LoginView {
         fun dataUser()
     }
 
-    interface LoginFacebookView {
-        fun initFB()
-        fun onButtonClicked(activity: FragmentActivity?)
-        fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent)
 
-    }
 
     interface LoginGoogleView {
+        fun loginFrom(from : String)
+        //facebook
+        fun initFB()
+        fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent)
+        fun onButtonClicked(activity: FragmentActivity?)
+        fun handleFacebookToken(
+            accessToken: AccessToken?,
+            activity: FragmentActivity?
+        )
+        //google
         fun configureGoogle(
             default_web_client_id: String,
             requireActivity: FragmentActivity
