@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:id="@+id/dialog_dateCity"
+              android:gravity="center"
+              android:padding="@dimen/length20dp"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:layout_marginBottom="@dimen/length10dp"
+            android:text="@string/city"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    <Spinner
+            android:id="@+id/drop_city"
+            android:spinnerMode="dropdown"
+            android:background="@drawable/customborder"
+            android:layout_width="@dimen/length300dp"
+            android:layout_height="@dimen/length50dp"></Spinner>
+
+</LinearLayout>

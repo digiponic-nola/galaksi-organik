@@ -31,6 +31,7 @@
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, asperiores aut commodi consequuntur cupiditate dolorem dolorum ducimus et harum inventore labore nihil porro quas quasi quia suscipit tempora vero voluptates!</string>
     <string name="category">Category</string>
     <string name="add_to_cart">Add to Cart</string>
+    <string name="city">Kota</string>
 
     <!-- array menu shop -->
     <string-array name="menu_shop">

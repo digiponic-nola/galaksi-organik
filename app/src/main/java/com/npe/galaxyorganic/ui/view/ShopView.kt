@@ -1,5 +1,6 @@
 package com.npe.galaxyorganic.ui.view
 
+import com.npe.galaxyorganic.ui.model.datum.DatumCitiesModel
 import com.npe.galaxyorganic.ui.model.datum.DatumShopDetailMenuModel
 import com.npe.galaxyorganic.ui.model.datum.DatumShopItemModel
 import com.npe.galaxyorganic.ui.model.datum.DatumShopMenuModel
@@ -14,6 +15,12 @@ interface ShopView {
         fun failedGetProduct(error: String)
         fun dataMenu(data: ArrayList<DatumShopMenuModel>)
         fun failedMenu(error : String)
+        fun showAlertDialog(
+            listNamaKota: MutableList<String>,
+            listIdKota: MutableList<Int>
+        )
+        //alert
+        fun alertNamaIdCity(listKota: ArrayList<DatumCitiesModel>)
     }
 
     interface ListAllItemView {
@@ -23,6 +30,8 @@ interface ShopView {
         fun setDate(year: Int, month: Int, day: Int)
         fun getAllItem()
         fun getDataMenu()
+        //alert
+        fun getlistCity()
     }
     interface DetailMenuView{
         fun failed(error : String)

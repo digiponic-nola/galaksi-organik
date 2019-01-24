@@ -1,5 +1,6 @@
 package com.npe.galaxyorganic.ui.presenter.shop
 
+import android.util.Log
 import com.npe.galaxyorganic.ui.model.api.ApiRespository
 import com.npe.galaxyorganic.ui.model.datum.DatumCitiesModel
 import com.npe.galaxyorganic.ui.model.datum.DatumShopItemModel
@@ -13,6 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ShopPresenter : ShopView.ListAllItemView {
@@ -26,6 +28,26 @@ class ShopPresenter : ShopView.ListAllItemView {
         this.viewItem = viewItem
     }
 
+    override fun getlistCity() {
+        val cities = ApiRespository.create()
+        var listKota : ArrayList<DatumCitiesModel> = arrayListOf()
+        cities.getListCities().enqueue(object : Callback<RootCitiesModel>{
+            override fun onFailure(call: Call<RootCitiesModel>, t: Throwable) {
+                Log.d("GAGAL_KOTA", t.message)
+            }
+
+            override fun onResponse(call: Call<RootCitiesModel>, response: Response<RootCitiesModel>) {
+                var data = response.body()
+                if(data != null){
+                    if(data.api_message.equals("success")){
+                        listKota = data.data as ArrayList<DatumCitiesModel>
+                        viewItem.alertNamaIdCity(listKota)
+                    }
+                }
+            }
+
+        })
+    }
 
     override fun getDataMenu() {
         val category = ApiRespository.create()
