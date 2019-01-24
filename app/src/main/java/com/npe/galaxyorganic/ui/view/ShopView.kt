@@ -5,11 +5,6 @@ import com.npe.galaxyorganic.ui.model.datum.DatumShopItemModel
 import com.npe.galaxyorganic.ui.model.datum.DatumShopMenuModel
 
 interface ShopView {
-    interface ShopMenuView {
-        fun dataMenu(data: ArrayList<DatumShopMenuModel>)
-        fun failedMenu(error : String)
-    }
-
     interface ShopItemView {
         fun setDateText(date: String)
         fun setAreaText(area: String)
@@ -17,10 +12,8 @@ interface ShopView {
         fun displayAreaDialog(itemData: Array<String?>, checkedItem: Int)
         fun dataItem(data: List<DatumShopItemModel>)
         fun failedGetProduct(error: String)
-    }
-
-    interface ShopMenuPresenterView {
-        fun getDataMenu()
+        fun dataMenu(data: ArrayList<DatumShopMenuModel>)
+        fun failedMenu(error : String)
     }
 
     interface ListAllItemView {
@@ -29,6 +22,7 @@ interface ShopView {
         fun setArea(area: String)
         fun setDate(year: Int, month: Int, day: Int)
         fun getAllItem()
+        fun getDataMenu()
     }
     interface DetailMenuView{
         fun failed(error : String)

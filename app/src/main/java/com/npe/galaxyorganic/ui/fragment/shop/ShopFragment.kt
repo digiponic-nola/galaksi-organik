@@ -15,13 +15,12 @@ import android.widget.*
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.model.datum.DatumShopItemModel
 import com.npe.galaxyorganic.ui.model.datum.DatumShopMenuModel
-import com.npe.galaxyorganic.ui.presenter.shop.ShopItemPresenter
-import com.npe.galaxyorganic.ui.presenter.shop.ShopMenuPresenter
+import com.npe.galaxyorganic.ui.presenter.shop.ShopPresenter
 import com.npe.galaxyorganic.ui.view.ShopView
 import kotlinx.android.synthetic.main.fragment_shop.view.*
 
 
-class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
+class ShopFragment : Fragment(), ShopView.ShopItemView {
 
     private lateinit var recyclerMenu: RecyclerView
     private lateinit var recyclerItem: RecyclerView
@@ -30,8 +29,7 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
     private lateinit var buttonDate: Button
     private lateinit var datePicker: DatePickerDialog
     private lateinit var buttonArea : Button
-    private lateinit var presenterItem : ShopItemPresenter
-    private lateinit var presenterMenu : ShopMenuPresenter
+    private lateinit var presenterShop : ShopPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,22 +42,21 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
         buttonDate = v.btn_dateShipping_shop
         buttonArea = v.btn_areaShipping_shop
 
-        presenterItem = ShopItemPresenter(this, requireContext())
-        presenterMenu = ShopMenuPresenter(this, requireContext())
+        presenterShop = ShopPresenter(this)
 
         //date shipping
         buttonDate.setOnClickListener {
-            presenterItem.onDatePickerClicked()
+            presenterShop.onDatePickerClicked()
         }
 
         //area shipping
         buttonArea.setOnClickListener {
-            presenterItem.onAreaPickerClicked()
+            presenterShop.onAreaPickerClicked()
         }
 
-        presenterMenu.getDataMenu()
+        presenterShop.getDataMenu()
 
-        presenterItem.getAllItem()
+        presenterShop.getAllItem()
 
         return v
     }
@@ -88,7 +85,7 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
     override fun displayDatePickerDialog(year: Int, month: Int, day: Int) {
         datePicker = DatePickerDialog(context, DatePickerDialog.OnDateSetListener{
             view,tahun, bulan, hari ->
-            presenterItem.setDate(tahun, bulan, hari)
+            presenterShop.setDate(tahun, bulan, hari)
         }, year, month, day)
         datePicker.show()
     }
@@ -98,8 +95,8 @@ class ShopFragment : Fragment(), ShopView.ShopMenuView, ShopView.ShopItemView {
         builder.setTitle("Area")
             .setSingleChoiceItems(itemData, checkedItem){
                     dialog: DialogInterface?, which: Int ->
-                presenterItem.checkedItem = which
-                presenterItem.setArea(itemData[which].toString())
+                presenterShop.checkedItem = which
+                presenterShop.setArea(itemData[which].toString())
                 dialog?.dismiss()
             }
             .setNeutralButton("Cancel"){
