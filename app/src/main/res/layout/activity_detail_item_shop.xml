@@ -77,8 +77,21 @@
                         android:background="@color/colorGreenSoft"
                         android:layout_width="@dimen/length100dp"
                         android:layout_height="@dimen/length40dp"
-                        android:layout_alignEnd="@+id/tv_desc_detailBarang"
-                        android:layout_alignTop="@+id/tv_hargaBarang_detailBarang"/>
+                        android:layout_marginTop="@dimen/length50dp"
+                        android:layout_alignParentEnd="true"/>
+
+                <Button
+                        android:visibility="gone"
+                        android:id="@+id/btn_checkout"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorWhite"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:text="@string/checkout"
+                        android:background="@color/colorGreenSoft"
+                        android:layout_width="@dimen/length100dp"
+                        android:layout_height="@dimen/length40dp"
+                        android:layout_alignBottom="@id/tv_category_detailBarang"
+                        android:layout_alignParentEnd="true"/>
 
                 <LinearLayout
                         android:visibility="gone"
@@ -87,11 +100,10 @@
                         android:orientation="horizontal"
                         android:layout_width="@dimen/length100dp"
                         android:layout_height="@dimen/length50dp"
-                        android:layout_alignEnd="@+id/tv_desc_detailBarang"
-                        android:layout_alignTop="@+id/tv_hargaBarang_detailBarang">
+                        android:layout_marginTop="@dimen/length50dp"
+                        android:layout_alignParentEnd="true">
 
                     <ImageButton
-                            android:scaleType="centerCrop"
                             android:id="@+id/btn_minusCart_detailItem"
                             android:src="@drawable/icon_rouded_minus"
                             android:layout_width="@dimen/length30dp"
@@ -108,7 +120,6 @@
                             android:layout_height="wrap_content"/>
 
                     <ImageButton
-                            android:scaleType="centerCrop"
                             android:id="@+id/btn_addCart_detailItem"
                             android:src="@drawable/icon_rouded_add"
                             android:layout_width="@dimen/length30dp"

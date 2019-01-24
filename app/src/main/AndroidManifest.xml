@@ -28,9 +28,11 @@
         </activity>
         <activity android:name=".ui.fragment.shop.DetailMenu.DetailMenuShopActivity">
         </activity>
-        <activity android:name=".ui.activity.shop.DetailItemShopActivity"
-        android:theme="@style/AppTheme.NoActionBar.Collapsing"
-        >
+        <activity
+                android:name=".ui.activity.shop.DetailItemShopActivity"
+                android:theme="@style/AppTheme.NoActionBar.Collapsing">
+        </activity>
+        <activity android:name=".ui.activity.shop.PaymentActivity">
         </activity>
     </application>
 

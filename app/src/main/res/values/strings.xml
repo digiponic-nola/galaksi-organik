@@ -28,13 +28,29 @@
     <string name="beli">Buy</string>
     <string name="login_first">you have to login first</string>
 
-    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, asperiores aut commodi consequuntur cupiditate dolorem dolorum ducimus et harum inventore labore nihil porro quas quasi quia suscipit tempora vero voluptates!</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, asperiores aut commodi
+        consequuntur cupiditate dolorem dolorum ducimus et harum inventore labore nihil porro quas quasi quia suscipit
+        tempora vero voluptates!
+    </string>
     <string name="category">Category</string>
     <string name="add_to_cart">Add to Cart</string>
     <string name="dikirim">Barang Anda di kirim ke</string>
     <string name="kota">kota</string>
     <string name="distrik">Distrik</string>
     <string name="date">Tanggal</string>
+    <string name="checkout">CheckOut</string>
+    <string name="detail_order">Detail Order</string>
+    <string name="belanja_lagi">Belanja Lagi</string>
+    <string name="detail_pengiriman">Detail Pengiriman</string>
+    <string name="tanggal_pengiriman">Tanggal Pengiriman</string>
+    <string name="area_pengiriman">Area Pengiriman</string>
+    <string name="nama_penerima">Nama Penerima</string>
+    <string name="email_penerima">Email Penerima</string>
+    <string name="ringkasan_pembayaran">Ringkasan Pembayaran</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="diskon">Diskon</string>
+    <string name="total_harga">Total Harga</string>
+    <string name="pembayaran">Pembayaran</string>
 
     <!-- array menu shop -->
     <string-array name="menu_shop">

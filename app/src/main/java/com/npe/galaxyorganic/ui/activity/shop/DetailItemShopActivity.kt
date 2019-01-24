@@ -1,5 +1,6 @@
 package com.npe.galaxyorganic.ui.activity.shop
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -38,9 +39,8 @@ class DetailItemShopActivity : AppCompatActivity(), ShopView.DetailItemShopView 
     private fun showLayoutAddCart() {
         btn_addToCart_detailItem.gone()
         layout_addToCart_detailItem.visible()
-
+        btn_checkout.visible()
         if(layout_addToCart_detailItem.visibility == View.VISIBLE){
-
             btn_addCart_detailItem.setOnClickListener {
                 this.stockProduct = this.stockProduct + 1
                 if(this.stockProduct > maxStock){
@@ -54,11 +54,17 @@ class DetailItemShopActivity : AppCompatActivity(), ShopView.DetailItemShopView 
                 this.stockProduct = this.stockProduct - 1
                 if(this.stockProduct <= 0){
                     this.stockProduct = 0
-                    layout_addToCart_detailItem.visibility = View.GONE
-                    btn_addToCart_detailItem.visibility = View.VISIBLE
+                    layout_addToCart_detailItem.gone()
+                    btn_addToCart_detailItem.visible()
+                    btn_checkout.visible()
                 } else {
                    displayBuyingStock(this.stockProduct)
                 }
+            }
+
+            btn_checkout.setOnClickListener {
+                val intent = Intent(applicationContext, PaymentActivity::class.java)
+                startActivity(intent)
             }
         }
     }
