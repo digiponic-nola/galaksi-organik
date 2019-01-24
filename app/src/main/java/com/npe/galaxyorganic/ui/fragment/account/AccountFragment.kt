@@ -4,13 +4,13 @@ package com.npe.galaxyorganic.ui.fragment.account
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.facebook.login.widget.LoginButton
 import com.google.firebase.auth.FirebaseAuth
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.activity.MainActivity
@@ -46,7 +46,7 @@ class AccountFragment : Fragment(), LoginView.AccountUser{
         loginPresenter = LoginPresenter(this)
         auth = FirebaseAuth.getInstance()
         dataUser()
-
+        Log.d("ID_USER_DB",loginPresenter.getIdUser().toString())
         btnlogout.setOnClickListener {
             loginPresenter.SignOut()
             loginPresenter.revokeAccess()
@@ -64,6 +64,7 @@ class AccountFragment : Fragment(), LoginView.AccountUser{
         Glide.with(requireActivity())
             .load(user?.photoUrl)
             .into(imgProfile)
+
     }
 
 }

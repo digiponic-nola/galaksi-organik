@@ -103,7 +103,9 @@ class LoginFragment : Fragment(), LoginView.LoginUserView {
 
     }
 
-    override fun successLogin() {
+    override fun successLogin(idUser: Int) {
+        val id = idUser.toString()
+        loginPresenter.idUser(id)
         Toast.makeText(context, "Selamat Datang " + auth.currentUser?.displayName, Toast.LENGTH_SHORT).show()
         val intent = Intent(context, MainActivity::class.java)
         startActivity(intent)

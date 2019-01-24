@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import com.npe.galaxyorganic.ui.model.api.ApiRespository
+import com.npe.galaxyorganic.ui.model.datum.DatumLoginModel
 import com.npe.galaxyorganic.ui.model.root.RequestLoginModel
 import com.npe.galaxyorganic.ui.model.root.RootLoginModel
 import com.npe.galaxyorganic.ui.view.LoginView
@@ -34,7 +35,9 @@ class LoginPresenter : LoginView.LoginGoogleView {
     companion object {
         lateinit var googleSignInClient: GoogleSignInClient
         lateinit var gso: GoogleSignInOptions
+        var userDataDB: ArrayList<DatumLoginModel> = arrayListOf()
         lateinit var from: String
+        lateinit var idUser: String
     }
 
     constructor(viewLogin: LoginView.LoginUserView) {
@@ -132,13 +135,26 @@ class LoginPresenter : LoginView.LoginGoogleView {
                 var dataResponse = response.body()
                 if (dataResponse != null) {
                     if (dataResponse.api_message.equals("success")) {
-                        Log.d("SetDB","BERHASIL")
-                        viewLogin.successLogin()
+                        userDataDB = dataResponse.data as ArrayList<DatumLoginModel>
+                        getDataUserDB(userDataDB)
                     }
                 }
             }
 
         })
+    }
+
+    override fun getDataUserDB(userDataDB: ArrayList<DatumLoginModel>) {
+        viewLogin.successLogin(userDataDB.get(0).id!!)
+    }
+
+    override fun idUser(id: String) {
+        LoginPresenter.idUser = id
+    }
+
+    override fun getIdUser(): Int {
+        val idInt : Int = LoginPresenter.idUser.toInt()
+        return idInt
     }
 
     override fun loginGoogle() {
@@ -149,7 +165,8 @@ class LoginPresenter : LoginView.LoginGoogleView {
     override fun SignOut() {
         if (from.equals("Facebook")) {
             auth.signOut()
-        } else if (from.equals("Google")) {
+        }
+        if (from.equals("Google")) {
             auth.signOut()
             googleSignInClient.signOut().addOnCompleteListener {
             }
