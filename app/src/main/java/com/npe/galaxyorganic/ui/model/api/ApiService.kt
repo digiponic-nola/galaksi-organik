@@ -20,4 +20,6 @@ interface ApiService{
     @POST("customers")
     fun getCustomers(@Body requestLogin : RequestLoginModel) : Call<RootLoginModel>
 
+    @GET("districs")
+    fun getListDistrik(@Query("cities_id") cities_id : Int) : Call<RootDistrikModel>
 }
