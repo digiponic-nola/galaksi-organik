@@ -1,7 +1,9 @@
 package com.npe.galaxyorganic.ui.presenter.login
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
+import android.database.sqlite.SQLiteConstraintException
 import android.support.v4.app.FragmentActivity
 import android.util.Log
 import com.facebook.AccessToken
@@ -19,9 +21,15 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import com.npe.galaxyorganic.ui.model.api.ApiRespository
 import com.npe.galaxyorganic.ui.model.datum.DatumLoginModel
+import com.npe.galaxyorganic.ui.model.db.CustomerModel
+import com.npe.galaxyorganic.ui.model.db.database
 import com.npe.galaxyorganic.ui.model.root.RequestLoginModel
 import com.npe.galaxyorganic.ui.model.root.RootLoginModel
 import com.npe.galaxyorganic.ui.view.LoginView
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.delete
+import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.db.select
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,6 +44,7 @@ class LoginPresenter : LoginView.LoginGoogleView {
         lateinit var googleSignInClient: GoogleSignInClient
         lateinit var gso: GoogleSignInOptions
         var userDataDB: ArrayList<DatumLoginModel> = arrayListOf()
+        var customerData: MutableList<CustomerModel> = mutableListOf()
         lateinit var from: String
         lateinit var idUser: String
     }
@@ -53,6 +62,54 @@ class LoginPresenter : LoginView.LoginGoogleView {
         LoginPresenter.from = from
     }
 
+    override fun addToCustomerModel(
+        context: Context?,
+        user: FirebaseUser?,
+        id: String
+    ) {
+        val customer_id = id.toInt()
+        val customer_name = user?.displayName
+        val customer_email = user?.email
+        val customer_photo = user?.photoUrl.toString()
+        try {
+            context?.database?.use {
+                insert(
+                    CustomerModel.TABLE_CUSTOMER,
+                    CustomerModel.CUSTOMER_ID to customer_id,
+                    CustomerModel.CUSTOMER_NAME to customer_name,
+                    CustomerModel.CUSTOMER_EMAIL to customer_email,
+                    CustomerModel.CUSTOMER_PHOTO to customer_photo
+                )
+            }
+            Log.d("SQL_LITE", "ADD CUSTOMER")
+        } catch (e: SQLiteConstraintException) {
+            Log.d("SQL_LITE_GAGAL", e.message)
+        }
+    }
+
+    override fun showDataDB(context: Context) {
+        customerData.clear()
+        context?.database?.use {
+            val result = select(CustomerModel.TABLE_CUSTOMER)
+            val data = result.parseList(classParser<CustomerModel>())
+            customerData.addAll(data)
+            viewAccount.dataUser(customerData)
+        }
+    }
+
+    override fun removeDataCustomerDB(context: Context, id : String) {
+        try {
+            val customer_id = id.toInt()
+
+            Log.d("ID_CUSTOMER_SQL", customer_id.toString())
+            context?.database?.use {
+                delete(CustomerModel.TABLE_CUSTOMER, "(CUSTOMER_ID = {customer_id})", "customer_id" to customer_id)
+            }
+            Log.d("SQL_DELETE_BERHASIL", "REMOVED DATA")
+        }catch (e : SQLiteConstraintException){
+            Log.d("SQL_CUSTOMER", "GAGAL DELETE")
+        }
+    }
 
     override fun configureGoogle(
         default_web_client_id: String,
@@ -153,7 +210,7 @@ class LoginPresenter : LoginView.LoginGoogleView {
     }
 
     override fun getIdUser(): Int {
-        val idInt : Int = LoginPresenter.idUser.toInt()
+        val idInt: Int = LoginPresenter.idUser.toInt()
         return idInt
     }
 
@@ -162,11 +219,13 @@ class LoginPresenter : LoginView.LoginGoogleView {
         viewLogin.startActivityForResult(signInIntent)
     }
 
-    override fun SignOut() {
+    override fun SignOut(context: Context, idSQLcustomer: String) {
         if (from.equals("Facebook")) {
+            removeDataCustomerDB(context, idSQLcustomer)
             auth.signOut()
         }
         if (from.equals("Google")) {
+            removeDataCustomerDB(context, idSQLcustomer)
             auth.signOut()
             googleSignInClient.signOut().addOnCompleteListener {
             }

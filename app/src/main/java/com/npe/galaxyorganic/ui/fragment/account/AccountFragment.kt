@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.activity.MainActivity
+import com.npe.galaxyorganic.ui.model.db.CustomerModel
 import com.npe.galaxyorganic.ui.presenter.login.LoginPresenter
 import com.npe.galaxyorganic.ui.view.LoginView
 import de.hdodenhof.circleimageview.CircleImageView
@@ -28,6 +29,7 @@ class AccountFragment : Fragment(), LoginView.AccountUser{
     private lateinit var imgProfile : CircleImageView
     private lateinit var auth : FirebaseAuth
     private lateinit var loginPresenter : LoginPresenter
+    private lateinit var idSQLcustomer : String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,26 +47,26 @@ class AccountFragment : Fragment(), LoginView.AccountUser{
 
         loginPresenter = LoginPresenter(this)
         auth = FirebaseAuth.getInstance()
-        dataUser()
-        Log.d("ID_USER_DB",loginPresenter.getIdUser().toString())
+        loginPresenter.showDataDB(requireContext())
+
         btnlogout.setOnClickListener {
-            loginPresenter.SignOut()
+            Log.d("CUSTOMER_ID", idSQLcustomer)
+            loginPresenter.SignOut(requireContext(),idSQLcustomer)
             loginPresenter.revokeAccess()
             val intent = Intent(context, MainActivity::class.java)
             startActivity(intent)
         }
-
         return v
     }
 
-    override fun dataUser() {
-        val user = auth.currentUser
-        tvEmail.text = user?.email
-        tvNama.text = user?.displayName
-        Glide.with(requireActivity())
-            .load(user?.photoUrl)
-            .into(imgProfile)
 
+    override fun dataUser(customerData: MutableList<CustomerModel>) {
+        this.idSQLcustomer = customerData.get(0).customer_id.toString()
+        tvEmail.text = customerData.get(0).customer_email
+        tvNama.text = customerData.get(0).customer_name
+        Glide.with(requireActivity())
+            .load(customerData.get(0).customer_photo)
+            .into(imgProfile)
     }
 
 }

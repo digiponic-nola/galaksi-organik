@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.main_frame, LoginFirstFragment(), LoginFirstFragment::class.java.simpleName)
                 .commit()
         }
+
     }
 
     private fun loadAccountFragment(savedInstanceState: Bundle?) {

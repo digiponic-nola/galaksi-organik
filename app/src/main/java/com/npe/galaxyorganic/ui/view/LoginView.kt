@@ -1,10 +1,13 @@
 package com.npe.galaxyorganic.ui.view
 
+import android.content.Context
 import android.content.Intent
 import android.support.v4.app.FragmentActivity
 import com.facebook.AccessToken
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.firebase.auth.FirebaseUser
 import com.npe.galaxyorganic.ui.model.datum.DatumLoginModel
+import com.npe.galaxyorganic.ui.model.db.CustomerModel
 
 interface LoginView {
     interface LoginUserView {
@@ -16,7 +19,7 @@ interface LoginView {
     }
 
     interface AccountUser {
-        fun dataUser()
+        fun dataUser(customerData: MutableList<CustomerModel>)
     }
 
     interface LoginGoogleView {
@@ -25,6 +28,14 @@ interface LoginView {
         fun getDataUserDB(userDataDB: ArrayList<DatumLoginModel>)
         fun idUser(id: String)
         fun getIdUser(): Int
+        //anko sql
+        fun addToCustomerModel(
+            context: Context?,
+            user: FirebaseUser?,
+            id: String
+        )
+        fun showDataDB(context : Context)
+        fun removeDataCustomerDB(context : Context, id : String)
         //facebook
         fun initFB()
         fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent)
@@ -40,7 +51,7 @@ interface LoginView {
         )
         fun firebaseAuthWithGoogle(account: GoogleSignInAccount?)
         fun loginGoogle()
-        fun SignOut()
+        fun SignOut(context: Context, idSQLcustomer: String)
         fun revokeAccess()
     }
 }

@@ -105,7 +105,9 @@ class LoginFragment : Fragment(), LoginView.LoginUserView {
 
     override fun successLogin(idUser: Int) {
         val id = idUser.toString()
+        val user = auth.currentUser
         loginPresenter.idUser(id)
+        loginPresenter.addToCustomerModel(context,user, id)
         Toast.makeText(context, "Selamat Datang " + auth.currentUser?.displayName, Toast.LENGTH_SHORT).show()
         val intent = Intent(context, MainActivity::class.java)
         startActivity(intent)
@@ -116,10 +118,6 @@ class LoginFragment : Fragment(), LoginView.LoginUserView {
 
     }
 
-
-    override fun onStart() {
-        super.onStart()
-    }
 
     override fun onResume() {
         super.onResume()
