@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,8 +78,9 @@ class ShopFragment : Fragment(), ShopView.ShopItemView {
         recyclerItem.adapter = mAdapterItem
     }
 
-    override fun setDateText(date: String) {
+    override fun setDateText(date: String, timeString: String) {
         //buttonDate.text = """$dayOfMonth-${monthOfYear + 1}-$year"""
+        Log.d("TIME", timeString)
         buttonDate.text = date
     }
 

@@ -77,11 +77,15 @@ class ShopPresenter : ShopView.ListAllItemView {
     }
 
     override fun setDate(year: Int, month: Int, day: Int) {
+        //date
         var sdf = SimpleDateFormat("dd/MMM/yyyy")
         var calendar: Calendar = Calendar.getInstance()
         calendar.set(year, month, day)
         var dateString: String = sdf.format(calendar.time)
-        viewItem.setDateText(dateString)
+        //time
+        var time = SimpleDateFormat("HH:mm:ss")
+        var timeString : String = time.format(calendar.time)
+        viewItem.setDateText(dateString, timeString)
     }
 
     override fun onAreaPickerClicked() {

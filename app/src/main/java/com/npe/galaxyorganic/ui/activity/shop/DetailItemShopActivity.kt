@@ -56,7 +56,7 @@ class DetailItemShopActivity : AppCompatActivity(), ShopView.DetailItemShopView 
                     this.stockProduct = 0
                     layout_addToCart_detailItem.gone()
                     btn_addToCart_detailItem.visible()
-                    btn_checkout.visible()
+                    btn_checkout.gone()
                 } else {
                    displayBuyingStock(this.stockProduct)
                 }

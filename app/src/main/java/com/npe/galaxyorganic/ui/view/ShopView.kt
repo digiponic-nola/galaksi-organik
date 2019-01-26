@@ -6,7 +6,7 @@ import com.npe.galaxyorganic.ui.model.datum.DatumShopMenuModel
 
 interface ShopView {
     interface ShopItemView {
-        fun setDateText(date: String)
+        fun setDateText(date: String, timeString: String)
         fun setAreaText(area: String)
         fun displayDatePickerDialog(year: Int, month: Int, day: Int)
         fun displayAreaDialog(itemData: Array<String?>, checkedItem: Int)
