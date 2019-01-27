@@ -1,5 +1,6 @@
 package com.npe.galaxyorganic.ui.view
 
+import android.content.Context
 import com.npe.galaxyorganic.ui.model.datum.DatumShopDetailMenuModel
 import com.npe.galaxyorganic.ui.model.datum.DatumShopItemModel
 import com.npe.galaxyorganic.ui.model.datum.DatumShopMenuModel
@@ -38,6 +39,7 @@ interface ShopView {
     }
 
     interface DetailItemPresenterView{
+        fun addBarangDBsql(context: Context, quantity : String)
         fun getDetailItemFromProduct(jsonString: String)
     }
 }

@@ -28,7 +28,7 @@ class DetailItemShopActivity : AppCompatActivity(), ShopView.DetailItemShopView 
             jsonString = getExtra.getString("DataItem")
         }
 
-        presenterDetailItem = DetailItemPresenter(applicationContext, this)
+        presenterDetailItem = DetailItemPresenter( this)
         presenterDetailItem.getDetailItemFromProduct(jsonString)
 
         btn_addToCart_detailItem.setOnClickListener {
@@ -63,10 +63,15 @@ class DetailItemShopActivity : AppCompatActivity(), ShopView.DetailItemShopView 
             }
 
             btn_checkout.setOnClickListener {
-                val intent = Intent(applicationContext, PaymentActivity::class.java)
-                startActivity(intent)
+                paymentActivity()
             }
         }
+    }
+
+    private fun paymentActivity() {
+        presenterDetailItem.addBarangDBsql(applicationContext, tv_jumlahBarang_detailItem.text.toString())
+        val intent = Intent(applicationContext, PaymentActivity::class.java)
+        startActivity(intent)
     }
 
     override fun getDataDetailItem(data: DatumShopItemModel) {

@@ -24,11 +24,20 @@ class DatabaseOpenHelper(context: Context) : ManagedSQLiteOpenHelper(context, "C
             CustomerModel.CUSTOMER_EMAIL to TEXT,
             CustomerModel.CUSTOMER_PHOTO to TEXT
         )
+        db?.createTable(OrderModel.TABLE_ORDER, true,
+            OrderModel.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+            OrderModel.PRODUCT_ID to INTEGER ,
+            OrderModel.PRODUCT_NAME to TEXT,
+            OrderModel.PRODUCT_PRICE to INTEGER,
+            OrderModel.QUANTITY to INTEGER,
+            OrderModel.SUB_TOTAL to INTEGER)
 
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.dropTable(CustomerModel.TABLE_CUSTOMER, true)
+        db?.dropTable(OrderModel.TABLE_ORDER , true)
+
     }
 }
 val Context.database: DatabaseOpenHelper
