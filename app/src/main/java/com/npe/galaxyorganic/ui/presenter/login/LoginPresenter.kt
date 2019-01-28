@@ -71,6 +71,7 @@ class LoginPresenter : LoginView.LoginGoogleView {
         val customer_name = user?.displayName
         val customer_email = user?.email
         val customer_photo = user?.photoUrl.toString()
+        val login_from = LoginPresenter.from
         try {
             context?.database?.use {
                 insert(
@@ -78,7 +79,8 @@ class LoginPresenter : LoginView.LoginGoogleView {
                     CustomerModel.CUSTOMER_ID to customer_id,
                     CustomerModel.CUSTOMER_NAME to customer_name,
                     CustomerModel.CUSTOMER_EMAIL to customer_email,
-                    CustomerModel.CUSTOMER_PHOTO to customer_photo
+                    CustomerModel.CUSTOMER_PHOTO to customer_photo,
+                    CustomerModel.LOGIN_FROM to login_from
                 )
             }
             Log.d("SQL_LITE", "ADD CUSTOMER")
@@ -219,12 +221,12 @@ class LoginPresenter : LoginView.LoginGoogleView {
         viewLogin.startActivityForResult(signInIntent)
     }
 
-    override fun SignOut(context: Context, idSQLcustomer: String) {
-        if (from.equals("Facebook")) {
+    override fun SignOut(context: Context, idSQLcustomer: String, login_from : String) {
+        if (login_from.equals("Facebook")) {
             removeDataCustomerDB(context, idSQLcustomer)
             auth.signOut()
         }
-        if (from.equals("Google")) {
+        if (login_from.equals("Google")) {
             removeDataCustomerDB(context, idSQLcustomer)
             auth.signOut()
             googleSignInClient.signOut().addOnCompleteListener {
@@ -232,8 +234,8 @@ class LoginPresenter : LoginView.LoginGoogleView {
         }
     }
 
-    override fun revokeAccess() {
-        if (from.equals("Google")) {
+    override fun revokeAccess(login_from : String) {
+        if (login_from.equals("Google")) {
             auth.signOut()
             googleSignInClient.revokeAccess().addOnCompleteListener {
             }

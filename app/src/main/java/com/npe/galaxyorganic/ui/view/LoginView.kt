@@ -51,7 +51,7 @@ interface LoginView {
         )
         fun firebaseAuthWithGoogle(account: GoogleSignInAccount?)
         fun loginGoogle()
-        fun SignOut(context: Context, idSQLcustomer: String)
-        fun revokeAccess()
+        fun SignOut(context: Context, idSQLcustomer: String, login_from : String)
+        fun revokeAccess(login_from : String)
     }
 }

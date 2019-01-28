@@ -30,7 +30,7 @@ class AccountFragment : Fragment(), LoginView.AccountUser{
     private lateinit var auth : FirebaseAuth
     private lateinit var loginPresenter : LoginPresenter
     private lateinit var idSQLcustomer : String
-
+    private lateinit var from : String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,8 +51,8 @@ class AccountFragment : Fragment(), LoginView.AccountUser{
 
         btnlogout.setOnClickListener {
             Log.d("CUSTOMER_ID", idSQLcustomer)
-            loginPresenter.SignOut(requireContext(),idSQLcustomer)
-            loginPresenter.revokeAccess()
+            loginPresenter.SignOut(requireContext(),idSQLcustomer, from)
+            loginPresenter.revokeAccess(from)
             val intent = Intent(context, MainActivity::class.java)
             startActivity(intent)
         }
@@ -67,6 +67,7 @@ class AccountFragment : Fragment(), LoginView.AccountUser{
         Glide.with(requireActivity())
             .load(customerData.get(0).customer_photo)
             .into(imgProfile)
+        this.from = customerData.get(0).login_from
     }
 
 }

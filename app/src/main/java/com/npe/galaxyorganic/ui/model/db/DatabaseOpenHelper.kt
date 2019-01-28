@@ -22,7 +22,8 @@ class DatabaseOpenHelper(context: Context) : ManagedSQLiteOpenHelper(context, "C
             CustomerModel.CUSTOMER_ID to INTEGER + UNIQUE,
             CustomerModel.CUSTOMER_NAME to TEXT,
             CustomerModel.CUSTOMER_EMAIL to TEXT,
-            CustomerModel.CUSTOMER_PHOTO to TEXT
+            CustomerModel.CUSTOMER_PHOTO to TEXT,
+            CustomerModel.LOGIN_FROM to TEXT
         )
         db?.createTable(OrderModel.TABLE_ORDER, true,
             OrderModel.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
