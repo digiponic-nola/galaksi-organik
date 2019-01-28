@@ -22,4 +22,7 @@ interface ApiService{
 
     @GET("districs")
     fun getListDistrik(@Query("cities_id") cities_id : Int) : Call<RootDistrikModel>
+
+    @POST("orders")
+    fun sendOrder(@Body requestOrder : RequestOrderModel) : Call<RootOrderModel>
 }
