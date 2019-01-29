@@ -14,6 +14,7 @@ interface PaymentView{
         fun dataDateTime(currentDate: String)
         fun dataKota(listDataCity: ArrayList<DatumCitiesModel>)
         fun dataDistrik(listDataDistrik: ArrayList<DatumDistrikModel>)
+        fun dataWaktuKirim(waktu : String)
     }
 
     interface PaymentPresenterView{
@@ -32,5 +33,6 @@ interface PaymentView{
         fun getCurrentDateTime()
         fun getCityApi()
         fun getDistrikApi(states_id : Int)
+        fun getWaktuPengiriman(currentTime: String)
     }
 }

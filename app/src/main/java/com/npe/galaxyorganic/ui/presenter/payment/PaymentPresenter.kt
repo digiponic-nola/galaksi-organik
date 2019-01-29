@@ -89,9 +89,20 @@ class PaymentPresenter : PaymentView.PaymentPresenterView{
     }
 
     override fun getCurrentDateTime() {
-        val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val currentDate = sdf.format(Date())
         view.dataDateTime(currentDate)
+    }
+
+    override fun getWaktuPengiriman(currentTime: String) {
+        val splited = currentTime.split(":")
+        val jam = splited.get(0)
+        Log.d("JAM", jam.toString())
+        if(jam.toInt() >= 12){
+            view.dataWaktuKirim("Besok")
+        } else if(jam.toInt() < 12){
+            view.dataWaktuKirim("Sekarang")
+        }
     }
 
     override fun getCityApi() {

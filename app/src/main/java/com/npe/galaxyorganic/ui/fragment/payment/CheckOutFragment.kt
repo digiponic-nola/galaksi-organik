@@ -2,6 +2,7 @@ package com.npe.galaxyorganic.ui.fragment.payment
 
 
 import android.os.Bundle
+import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,7 +20,6 @@ import com.npe.galaxyorganic.ui.model.db.OrderModel
 import com.npe.galaxyorganic.ui.presenter.payment.PaymentPresenter
 import com.npe.galaxyorganic.ui.view.PaymentView
 import kotlinx.android.synthetic.main.fragment_check_out.view.*
-import org.jetbrains.anko.toast
 
 
 class CheckOutFragment : Fragment(), PaymentView.PaymentUserView {
@@ -37,6 +37,7 @@ class CheckOutFragment : Fragment(), PaymentView.PaymentUserView {
     private lateinit var nama_kota : String
     private lateinit var nama_distrik : String
     private var customer_id: Int = 0
+    private lateinit var keteranganKirim : TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,6 +50,7 @@ class CheckOutFragment : Fragment(), PaymentView.PaymentUserView {
         currentDate = v.tv_tanggalPengiriman
         dropkota = v.drop_areaPengiriman
         dropDistrik = v.drop_distrikPengiriman
+        keteranganKirim = v.tv_keteranganKirim
         //order
         presenterPayment = PaymentPresenter(this)
         presenterPayment.showDataOrderSQLDB(requireContext())
@@ -58,8 +60,11 @@ class CheckOutFragment : Fragment(), PaymentView.PaymentUserView {
         presenterPayment.getCurrentDateTime()
         //area
         presenterPayment.getCityApi()
-        //Log.d("NAMA_KOTA", dropkota.selectedItem.toString())
+        //waktu pengiriman
+        presenterPayment.getWaktuPengiriman(currentTime)
+        //Log.d("WAKTU_KIRIM",presenterPayment.getWaktuPengiriman(currentTime))
         return v
+
     }
 
     override fun dataOrder(dataOrder: MutableList<OrderModel>) {
@@ -116,5 +121,10 @@ class CheckOutFragment : Fragment(), PaymentView.PaymentUserView {
                 nama_distrik = dropDistrik.selectedItem.toString()
             }
         }
+    }
+
+    override fun dataWaktuKirim(waktu: String) {
+        Log.d("JAM_FRAGMENT", waktu)
+        keteranganKirim.text = "Waktu Pembelian $currentTime , maka pengiriman akan dilakukan pada hari $waktu"
     }
 }
