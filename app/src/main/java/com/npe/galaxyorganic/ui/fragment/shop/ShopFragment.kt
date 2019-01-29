@@ -4,6 +4,7 @@ package com.npe.galaxyorganic.ui.fragment.shop
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.DialogInterface
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -19,12 +20,9 @@ import com.npe.galaxyorganic.ui.model.datum.DatumShopMenuModel
 import com.npe.galaxyorganic.ui.presenter.shop.ShopPresenter
 import com.npe.galaxyorganic.ui.view.ShopView
 import kotlinx.android.synthetic.main.fragment_shop.view.*
-import android.support.design.widget.BottomSheetBehavior
-import android.widget.LinearLayout
-import butterknife.BindView
-import butterknife.ButterKnife
-import kotlinx.android.synthetic.main.bottom_sheet.*
-import kotlinx.android.synthetic.main.bottom_sheet.view.*
+import com.npe.galaxyorganic.ui.model.db.OrderModel
+import com.npe.galaxyorganic.ui.model.db.database
+import org.jetbrains.anko.db.*
 
 
 class ShopFragment : Fragment(), ShopView.ShopItemView {
@@ -35,8 +33,18 @@ class ShopFragment : Fragment(), ShopView.ShopItemView {
     private lateinit var mAdapterItem: AdapterShopItemFragment
     private lateinit var buttonDate: Button
     private lateinit var datePicker: DatePickerDialog
-    private lateinit var buttonArea : Button
-    private lateinit var presenterShop : ShopPresenter
+    private lateinit var buttonArea: Button
+    private lateinit var presenterShop: ShopPresenter
+
+    private var orderData: MutableList<OrderModel> = mutableListOf()
+
+    override fun onResume() {
+        super.onResume()
+        context?.database!!.use {
+            delete(OrderModel.TABLE_ORDER)
+            Log.d("INSERT DROP", "DROP SUCCESS")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,8 +88,38 @@ class ShopFragment : Fragment(), ShopView.ShopItemView {
     }
 
     override fun dataItem(data: List<DatumShopItemModel>) {
+        val buyDefault = 0
+        for (i in data.indices) {
+            try {
+                context!!.database.use {
+                    insert(
+                        OrderModel.TABLE_ORDER,
+                        OrderModel.PRODUCT_ID to data.get(i).id,
+                        OrderModel.PRODUCT_NAME to data.get(i).name,
+                        OrderModel.PRODUCT_PRICE to data.get(i).sell_price,
+                        OrderModel.QUANTITY to data.get(i).stock,
+                        OrderModel.SUB_TOTAL to buyDefault,
+                        OrderModel.BUY_QUANTITY to buyDefault
+                    )
+                }
+                Log.d("INSERT SUCCESS","INSERT SUCCESS")
+            } catch (e: SQLiteConstraintException) {
+                Log.d("INSERT ERROR", "INSERT ERROR")
+            }
+
+        }
+        try {
+            context!!.database.use {
+                val result = select(OrderModel.TABLE_ORDER)
+                val data = result.parseList(classParser<OrderModel>())
+                orderData.addAll(data)
+
+            }
+        } catch (e : SQLiteConstraintException) {
+
+        }
         recyclerItem.layoutManager = GridLayoutManager(activity, 2)
-        mAdapterItem = AdapterShopItemFragment(requireContext(), data)
+        mAdapterItem = AdapterShopItemFragment(requireContext(), orderData)
         recyclerItem.adapter = mAdapterItem
     }
 
@@ -92,24 +130,21 @@ class ShopFragment : Fragment(), ShopView.ShopItemView {
     }
 
     override fun displayDatePickerDialog(year: Int, month: Int, day: Int) {
-        datePicker = DatePickerDialog(context, DatePickerDialog.OnDateSetListener{
-            view,tahun, bulan, hari ->
+        datePicker = DatePickerDialog(context, DatePickerDialog.OnDateSetListener { view, tahun, bulan, hari ->
             presenterShop.setDate(tahun, bulan, hari)
         }, year, month, day)
         datePicker.show()
     }
 
     override fun displayAreaDialog(itemData: Array<String?>, checkedItem: Int) {
-        val builder : AlertDialog.Builder = AlertDialog.Builder(context)
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setTitle("Area")
-            .setSingleChoiceItems(itemData, checkedItem){
-                    dialog: DialogInterface?, which: Int ->
+            .setSingleChoiceItems(itemData, checkedItem) { dialog: DialogInterface?, which: Int ->
                 presenterShop.checkedItem = which
                 presenterShop.setArea(itemData[which].toString())
                 dialog?.dismiss()
             }
-            .setNeutralButton("Cancel"){
-                    dialog, which ->
+            .setNeutralButton("Cancel") { dialog, which ->
                 dialog.cancel()
             }
         val mDialog = builder.create()

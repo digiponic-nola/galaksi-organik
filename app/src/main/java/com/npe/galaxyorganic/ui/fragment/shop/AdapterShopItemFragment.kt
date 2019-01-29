@@ -11,10 +11,10 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.activity.shop.DetailItemShopActivity
-import com.npe.galaxyorganic.ui.model.datum.DatumShopItemModel
+import com.npe.galaxyorganic.ui.model.db.OrderModel
 import kotlinx.android.synthetic.main.list_item_shop.view.*
 
-class AdapterShopItemFragment(val context : Context, val items : List<DatumShopItemModel>) : RecyclerView.Adapter<AdapterShopItemFragment.ViewHolder>(){
+class AdapterShopItemFragment(val context: Context, val items: MutableList<OrderModel>) : RecyclerView.Adapter<AdapterShopItemFragment.ViewHolder>(){
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(p0.context).inflate(R.layout.list_item_shop, p0, false))
     }
@@ -26,12 +26,12 @@ class AdapterShopItemFragment(val context : Context, val items : List<DatumShopI
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         val list = items.get(p1)
 
-        Glide.with(context)
-            .load(list.image)
-            .into(p0.imageBarang)
+//        Glide.with(context)
+//            .load(list.image)
+//            .into(p0.imageBarang)
 
-        p0.namaBarnag?.text = list.name
-        p0.hargaBarang?.text = "Rp "+list.sell_price
+        p0.namaBarnag?.text = list.product_name
+        p0.hargaBarang?.text = "Rp "+list.product_price
 
         p0.btnBeli.setOnClickListener {
             var gson = Gson()
