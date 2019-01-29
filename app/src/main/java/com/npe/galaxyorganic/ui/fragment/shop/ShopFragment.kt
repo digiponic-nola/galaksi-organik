@@ -99,7 +99,8 @@ class ShopFragment : Fragment(), ShopView.ShopItemView {
                         OrderModel.PRODUCT_PRICE to data.get(i).sell_price,
                         OrderModel.QUANTITY to data.get(i).stock,
                         OrderModel.SUB_TOTAL to buyDefault,
-                        OrderModel.BUY_QUANTITY to buyDefault
+                        OrderModel.BUY_QUANTITY to buyDefault,
+                        OrderModel.IMAGE_PRODUCT to data.get(i).image
                     )
                 }
                 Log.d("INSERT SUCCESS","INSERT SUCCESS")

@@ -35,7 +35,7 @@ interface ShopView {
     }
 
     interface DetailItemShopView{
-        fun getDataDetailItem(data: DatumShopItemModel)
+        fun getDataDetailItem(data: Int)
     }
 
     interface DetailItemPresenterView{

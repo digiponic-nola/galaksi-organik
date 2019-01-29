@@ -7,7 +7,8 @@ data class OrderModel(
     val product_price : Long,
     val quantity : Int,
     val sub_total : Long,
-    val buy_quantity : Int
+    val buy_quantity : Int,
+    val image_product : String
 ) {
     companion object {
         const val TABLE_ORDER = "TABLE_ORDER"
@@ -18,5 +19,6 @@ data class OrderModel(
         const val QUANTITY = "QUANTITY"
         const val SUB_TOTAL= "SUB_TOTAL"
         const val BUY_QUANTITY = "BUY_QUANTITY"
+        const val IMAGE_PRODUCT = "IMAGE_PRODUCT"
     }
 }

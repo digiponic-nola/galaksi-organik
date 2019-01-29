@@ -22,9 +22,11 @@ class DetailItemPresenter :
 
 
     override fun getDetailItemFromProduct(jsonString: String) {
-        gson = Gson()
+        /*gson = Gson()
         data = gson.fromJson(jsonString, DatumShopItemModel::class.java)
-        view.getDataDetailItem(data)
+        */
+        val id = jsonString.toInt()
+        view.getDataDetailItem(id)
     }
 
     override fun addBarangDBsql(context: Context, quantity: String) {

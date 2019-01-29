@@ -26,9 +26,9 @@ class AdapterShopItemFragment(val context: Context, val items: MutableList<Order
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         val list = items.get(p1)
 
-//        Glide.with(context)
-//            .load(list.image)
-//            .into(p0.imageBarang)
+        Glide.with(context)
+            .load(list.image_product)
+            .into(p0.imageBarang)
 
         p0.namaBarnag?.text = list.product_name
         p0.hargaBarang?.text = "Rp "+list.product_price
@@ -36,7 +36,7 @@ class AdapterShopItemFragment(val context: Context, val items: MutableList<Order
         p0.btnBeli.setOnClickListener {
             var gson = Gson()
             var jsonString = gson.toJson(list)
-            toDetailItem(context, jsonString)
+            toDetailItem(context, list.product_id.toString())
         }
 
     }
@@ -44,7 +44,7 @@ class AdapterShopItemFragment(val context: Context, val items: MutableList<Order
     private fun toDetailItem(context: Context, list: String) {
         val intent = Intent(context, DetailItemShopActivity::class.java)
         Log.d("DataItem", list)
-        intent.putExtra("DataItem", list)
+        intent.putExtra("ID_ITEM", list)
         context.startActivity(intent)
     }
 
