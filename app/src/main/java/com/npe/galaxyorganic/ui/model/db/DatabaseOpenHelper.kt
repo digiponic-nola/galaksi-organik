@@ -31,7 +31,8 @@ class DatabaseOpenHelper(context: Context) : ManagedSQLiteOpenHelper(context, "C
             OrderModel.PRODUCT_NAME to TEXT,
             OrderModel.PRODUCT_PRICE to INTEGER,
             OrderModel.QUANTITY to INTEGER,
-            OrderModel.SUB_TOTAL to INTEGER)
+            OrderModel.SUB_TOTAL to INTEGER,
+            OrderModel.BUY_QUANTITY to INTEGER)
 
     }
 

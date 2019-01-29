@@ -32,8 +32,9 @@ class DetailItemPresenter :
         val product_id = this.data.id
         val product_name = this.data.name
         val product_price = this.data.sell_price?.toInt()
-        val product_quantity = quantity.toInt()
-        val sub_total = product_price!! * product_quantity
+        val product_quantity = this.data.stock?.toInt()
+        val buy_quantity = quantity.toInt()
+        val sub_total = product_price!! * buy_quantity
         try {
             context?.database?.use {
                 insert(
@@ -42,7 +43,8 @@ class DetailItemPresenter :
                     OrderModel.PRODUCT_NAME to product_name,
                     OrderModel.PRODUCT_PRICE to product_price,
                     OrderModel.QUANTITY to product_quantity,
-                    OrderModel.SUB_TOTAL to sub_total
+                    OrderModel.SUB_TOTAL to sub_total,
+                    OrderModel.BUY_QUANTITY to buy_quantity
                 )
             }
             Log.d("INSERT_BARANG_SUCCESS", "MASUK")
