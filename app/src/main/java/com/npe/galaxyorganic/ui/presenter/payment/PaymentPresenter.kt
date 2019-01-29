@@ -3,11 +3,14 @@ package com.npe.galaxyorganic.ui.presenter.payment
 import android.content.Context
 import android.util.Log
 import com.npe.galaxyorganic.ui.model.api.ApiRespository
-import com.npe.galaxyorganic.ui.model.api.ApiService
+import com.npe.galaxyorganic.ui.model.datum.DatumCitiesModel
+import com.npe.galaxyorganic.ui.model.datum.DatumDistrikModel
 import com.npe.galaxyorganic.ui.model.db.CustomerModel
 import com.npe.galaxyorganic.ui.model.db.OrderModel
 import com.npe.galaxyorganic.ui.model.db.database
 import com.npe.galaxyorganic.ui.model.root.RequestOrderModel
+import com.npe.galaxyorganic.ui.model.root.RootCitiesModel
+import com.npe.galaxyorganic.ui.model.root.RootDistrikModel
 import com.npe.galaxyorganic.ui.model.root.RootOrderModel
 import com.npe.galaxyorganic.ui.view.PaymentView
 import org.jetbrains.anko.db.classParser
@@ -16,6 +19,9 @@ import org.json.JSONArray
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class PaymentPresenter : PaymentView.PaymentPresenterView{
 
@@ -75,6 +81,54 @@ class PaymentPresenter : PaymentView.PaymentPresenterView{
                 if(dataResponse != null){
                     if(dataResponse.api_message.equals("success")){
 
+                    }
+                }
+            }
+
+        })
+    }
+
+    override fun getCurrentDateTime() {
+        val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+        val currentDate = sdf.format(Date())
+        view.dataDateTime(currentDate)
+    }
+
+    override fun getCityApi() {
+        val city = ApiRespository.create()
+        var listDataCity : ArrayList<DatumCitiesModel> = arrayListOf()
+        city.getListCities().enqueue(object : Callback<RootCitiesModel>{
+            override fun onFailure(call: Call<RootCitiesModel>, t: Throwable) {
+                Log.d("GAGAL_CITY_CHECKOUT", t.message)
+            }
+
+            override fun onResponse(call: Call<RootCitiesModel>, response: Response<RootCitiesModel>) {
+                val data = response.body()
+                if(data != null){
+                    if(data.api_message.equals("success")){
+                        listDataCity = data.data as ArrayList<DatumCitiesModel>
+                        view.dataKota(listDataCity)
+                    }
+                }
+            }
+
+        })
+    }
+
+    override fun getDistrikApi(states_id: Int) {
+        val distrik = ApiRespository.create()
+        var listDataDistrik : ArrayList<DatumDistrikModel> = arrayListOf()
+        distrik.getListDistrik(states_id).enqueue(object : Callback<RootDistrikModel>{
+            override fun onFailure(call: Call<RootDistrikModel>, t: Throwable) {
+                Log.d("GAGAL_DISTRIK_CHECKOUT", t.message)
+            }
+
+            override fun onResponse(call: Call<RootDistrikModel>, response: Response<RootDistrikModel>) {
+                val data = response.body()
+                if(data != null){
+                    if(data.api_message.equals("success")){
+                        listDataDistrik = data.data as ArrayList<DatumDistrikModel>
+                        view.dataDistrik(listDataDistrik)
                     }
                 }
             }

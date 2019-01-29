@@ -1,6 +1,8 @@
 package com.npe.galaxyorganic.ui.view
 
 import android.content.Context
+import com.npe.galaxyorganic.ui.model.datum.DatumCitiesModel
+import com.npe.galaxyorganic.ui.model.datum.DatumDistrikModel
 import com.npe.galaxyorganic.ui.model.db.CustomerModel
 import com.npe.galaxyorganic.ui.model.db.OrderModel
 import org.json.JSONArray
@@ -9,6 +11,9 @@ interface PaymentView{
     interface PaymentUserView{
         fun dataOrder(dataOrder: MutableList<OrderModel>)
         fun dataCustomer(dataCustomer : MutableList<CustomerModel>)
+        fun dataDateTime(currentDate: String)
+        fun dataKota(listDataCity: ArrayList<DatumCitiesModel>)
+        fun dataDistrik(listDataDistrik: ArrayList<DatumDistrikModel>)
     }
 
     interface PaymentPresenterView{
@@ -24,5 +29,8 @@ interface PaymentView{
                          ordering_user : String,
                          ordering_detail : JSONArray,
                          ordering_email : String)
+        fun getCurrentDateTime()
+        fun getCityApi()
+        fun getDistrikApi(states_id : Int)
     }
 }

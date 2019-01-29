@@ -51,6 +51,8 @@
     <string name="diskon">Diskon</string>
     <string name="total_harga">Total Harga</string>
     <string name="pembayaran">Pembayaran</string>
+    <string name="tanggal_pembelian">Tanggal Pembelian</string>
+    <string name="distrik_pengiriman">Distrik Pengiriman</string>
 
     <!-- array menu shop -->
     <string-array name="menu_shop">
