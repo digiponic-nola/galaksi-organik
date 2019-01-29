@@ -94,13 +94,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <Spinner
+                    android:background="@drawable/customborder"
                     android:spinnerMode="dropdown"
+                    android:layout_marginRight="@dimen/length10dp"
                     android:layout_marginLeft="@dimen/length10dp"
                     android:layout_marginBottom="@dimen/length5dp"
                     android:textColor="@color/colorGreenSoft"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:id="@+id/drop_areaPengiriman"
-                    android:layout_width="@dimen/length300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/length50dp"/>
 
             <TextView
@@ -110,15 +112,55 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <Spinner
+                    android:layout_marginRight="@dimen/length10dp"
+                    android:background="@drawable/customborder"
                     android:spinnerMode="dropdown"
                     android:layout_marginLeft="@dimen/length10dp"
                     android:layout_marginBottom="@dimen/length5dp"
                     android:textColor="@color/colorGreenSoft"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:id="@+id/drop_distrikPengiriman"
-                    android:layout_width="@dimen/length300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/length50dp"/>
 
+            <TextView
+                    android:layout_marginBottom="10dp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:text="@string/alamat_penerima"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <EditText
+                    android:hint="@string/hint_alamat"
+                    android:layout_marginRight="@dimen/length10dp"
+                    android:layout_marginLeft="@dimen/length10dp"
+                    android:id="@+id/et_alamat_checkout"
+                    android:layout_marginBottom="@dimen/length10dp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:layout_width="match_parent"
+                    android:gravity="left|top"
+                    android:inputType="textMultiLine"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:layout_marginBottom="10dp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:text="@string/nomor_penerima"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <EditText
+                    android:maxLength="12"
+                    android:hint="@string/hint_notelp"
+                    android:layout_marginRight="@dimen/length10dp"
+                    android:layout_marginLeft="@dimen/length10dp"
+                    android:id="@+id/et_notelp_checkout"
+                    android:layout_marginBottom="@dimen/length10dp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:layout_width="match_parent"
+                    android:gravity="left|top"
+                    android:ems="1"
+                    android:inputType="numberDecimal"
+                    android:layout_height="wrap_content"/>
             <TextView
                     android:id="@+id/tv_keteranganKirim"
                     android:layout_gravity="center_horizontal"

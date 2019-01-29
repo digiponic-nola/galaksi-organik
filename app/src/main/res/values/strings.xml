@@ -53,6 +53,10 @@
     <string name="pembayaran">Pembayaran</string>
     <string name="tanggal_pembelian">Tanggal Pembelian</string>
     <string name="distrik_pengiriman">Distrik Pengiriman</string>
+    <string name="alamat_penerima">Alamat Penerima</string>
+    <string name="hint_alamat">Jalan Galaxy Organic</string>
+    <string name="nomor_penerima">Nomor Telepon Penerima</string>
+    <string name="hint_notelp">082257704463</string>
 
     <!-- array menu shop -->
     <string-array name="menu_shop">

@@ -8,10 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import com.npe.galaxyorganic.R
 import com.npe.galaxyorganic.ui.model.datum.DatumCitiesModel
 import com.npe.galaxyorganic.ui.model.datum.DatumDistrikModel
@@ -38,6 +35,8 @@ class CheckOutFragment : Fragment(), PaymentView.PaymentUserView {
     private lateinit var nama_distrik : String
     private var customer_id: Int = 0
     private lateinit var keteranganKirim : TextView
+    private lateinit var alamatPenerima : EditText
+    private lateinit var notelpPenerima : EditText
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,6 +50,8 @@ class CheckOutFragment : Fragment(), PaymentView.PaymentUserView {
         dropkota = v.drop_areaPengiriman
         dropDistrik = v.drop_distrikPengiriman
         keteranganKirim = v.tv_keteranganKirim
+        alamatPenerima = v.et_alamat_checkout
+        notelpPenerima = v.et_notelp_checkout
         //order
         presenterPayment = PaymentPresenter(this)
         presenterPayment.showDataOrderSQLDB(requireContext())
