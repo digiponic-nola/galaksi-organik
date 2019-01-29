@@ -19,6 +19,12 @@ import com.npe.galaxyorganic.ui.model.datum.DatumShopMenuModel
 import com.npe.galaxyorganic.ui.presenter.shop.ShopPresenter
 import com.npe.galaxyorganic.ui.view.ShopView
 import kotlinx.android.synthetic.main.fragment_shop.view.*
+import android.support.design.widget.BottomSheetBehavior
+import android.widget.LinearLayout
+import butterknife.BindView
+import butterknife.ButterKnife
+import kotlinx.android.synthetic.main.bottom_sheet.*
+import kotlinx.android.synthetic.main.bottom_sheet.view.*
 
 
 class ShopFragment : Fragment(), ShopView.ShopItemView {
@@ -37,6 +43,7 @@ class ShopFragment : Fragment(), ShopView.ShopItemView {
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.fragment_shop, container, false)
+
 
         recyclerMenu = v.recycler_menu_shop
         recyclerItem = v.recycler_all_list_shop
