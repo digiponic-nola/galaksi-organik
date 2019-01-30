@@ -207,7 +207,7 @@
                     android:textAlignment="viewEnd"
                     android:layout_marginBottom="@dimen/length5dp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:text="@string/diskon"
+                    android:text="0"
                     android:id="@+id/tv_diskon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -230,6 +230,7 @@
                     android:layout_height="wrap_content"/>
 
             <Button
+                    android:id="@+id/btn_pembayaran"
                     android:textColor="@color/colorWhite"
                     android:textStyle="bold"
                     android:text="@string/pembayaran"

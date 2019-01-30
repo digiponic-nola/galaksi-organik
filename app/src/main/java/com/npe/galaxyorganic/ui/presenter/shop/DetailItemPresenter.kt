@@ -9,6 +9,7 @@ import com.npe.galaxyorganic.ui.model.db.OrderModel
 import com.npe.galaxyorganic.ui.model.db.database
 import com.npe.galaxyorganic.ui.view.ShopView
 import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.db.select
 
 class DetailItemPresenter :
     ShopView.DetailItemPresenterView {
@@ -28,6 +29,7 @@ class DetailItemPresenter :
     }
 
     override fun addBarangDBsql(context: Context, quantity: String) {
+        //show barang
         Log.d("DATA_PRODUCT", this.data.toString())
         val product_id = this.data.id
         val product_name = this.data.name
@@ -36,6 +38,10 @@ class DetailItemPresenter :
         val sub_total = product_price!! * product_quantity
         try {
             context?.database?.use {
+                /*execSQL(
+                    ""
+                )*/
+
                 insert(
                     OrderModel.TABLE_ORDER,
                     OrderModel.PRODUCT_ID to product_id,

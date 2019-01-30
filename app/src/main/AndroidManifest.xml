@@ -24,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MainActivity">
+        <activity android:name=".ui.activity.LoginActivity">
         </activity>
         <activity android:name=".ui.fragment.shop.DetailMenu.DetailMenuShopActivity">
         </activity>
@@ -33,6 +33,8 @@
                 android:theme="@style/AppTheme.NoActionBar.Collapsing">
         </activity>
         <activity android:name=".ui.activity.shop.PaymentActivity">
+        </activity>
+        <activity android:name=".ui.activity.MainActivity">
         </activity>
     </application>
 
