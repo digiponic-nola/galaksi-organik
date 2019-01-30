@@ -43,6 +43,7 @@ class PaymentPresenter : PaymentView.PaymentPresenterView{
             val data = result.parseList(classParser<OrderModel>())
             dataOrder.addAll(data)
             view.dataOrder(dataOrder)
+            Log.d("ID_BARANG_ADA", dataOrder.toString())
         }
     }
 

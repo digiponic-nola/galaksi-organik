@@ -22,9 +22,9 @@ class AdapterDetailItemShop(val context : Context, val items : List<OrderModel>)
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         val list = items.get(p1)
-
-//        Glide.with(context)
-//            .load(list.)
+        Glide.with(context)
+            .load(list.image)
+            .into(p0.image)
 
         p0.nama.text = list.product_name
         p0.harga.text = list.product_price.toString()

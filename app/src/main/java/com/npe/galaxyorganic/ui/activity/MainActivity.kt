@@ -161,13 +161,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadOrderFragment(savedInstanceState: Bundle?) {
-        if (savedInstanceState != null) {
+        if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_frame, OrderFragment(), OrderFragment::class.java.simpleName)
                 .commit()
-        } else {
-            Toast.makeText(applicationContext, "Login First", Toast.LENGTH_SHORT).show()
         }
     }
 
