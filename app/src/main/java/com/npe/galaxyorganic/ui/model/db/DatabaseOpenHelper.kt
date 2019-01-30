@@ -26,12 +26,14 @@ class DatabaseOpenHelper(context: Context) : ManagedSQLiteOpenHelper(context, "C
             CustomerModel.LOGIN_FROM to TEXT
         )
         db?.createTable(OrderModel.TABLE_ORDER, true,
-            OrderModel.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
-            OrderModel.PRODUCT_ID to INTEGER ,
+//            OrderModel.ID to INTEGER + AUTOINCREMENT,
+            OrderModel.PRODUCT_ID to INTEGER + PRIMARY_KEY,
             OrderModel.PRODUCT_NAME to TEXT,
             OrderModel.PRODUCT_PRICE to INTEGER,
             OrderModel.QUANTITY to INTEGER,
-            OrderModel.SUB_TOTAL to INTEGER)
+            OrderModel.SUB_TOTAL to INTEGER,
+            OrderModel.BUY_QUANTITY to INTEGER,
+            OrderModel.PRODUCT_IMAGE to TEXT)
 
     }
 

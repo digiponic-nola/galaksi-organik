@@ -1,12 +1,14 @@
 package com.npe.galaxyorganic.ui.model.db
 
 data class OrderModel(
-    val id : Long?,
-    val product_id : Int,
-    val product_name : String,
-    val product_price : Long,
-    val quantity : Int,
-    val sub_total : Long
+//    val id: Long?,
+    val product_id: Int,
+    val product_name: String,
+    val product_price: Long,
+    val quantity: Int,
+    val sub_total: Long,
+    val buy_quantity: Int,
+    val product_image: String
 ) {
     companion object {
         const val TABLE_ORDER = "TABLE_ORDER"
@@ -15,6 +17,8 @@ data class OrderModel(
         const val PRODUCT_NAME = "PRODUCT_NAME"
         const val PRODUCT_PRICE = "PRODUCT_PRICE"
         const val QUANTITY = "QUANTITY"
-        const val SUB_TOTAL= "SUB_TOTAL"
+        const val SUB_TOTAL = "SUB_TOTAL"
+        const val BUY_QUANTITY = "BUY_QUANTITY"
+        const val PRODUCT_IMAGE = "PRODUCT_IMAGE"
     }
 }
