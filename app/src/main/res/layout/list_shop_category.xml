@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120dp"
+    android:layout_margin="3dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:id="@+id/layoutKategoriProduk"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imgv_listMenu_shop"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+    <TextView
+        android:layout_marginTop="3dp"
+        android:textColor="@color/colorDarkGrey"
+        android:id="@+id/tv_listMenu_shop"
+        android:text="TEXT"
+        android:textAlignment="center"
+        android:textSize="12dp"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
